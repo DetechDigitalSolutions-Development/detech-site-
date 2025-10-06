@@ -1,0 +1,77 @@
+{
+    "services": [
+        {
+            "id": "ui-design",
+            "title": "User Interface Design",
+            "image": "assets/img/service/s1.jpg",
+            "description": "Our UI Design focuses on creating clean, modern, and visually engaging interfaces that reflect your brand identity while ensuring ease of use. We believe that a great interface is more than just aesthetics it's about clarity, consistency, and guiding users effortlessly through your digital products.",
+            "why_choose": {
+                "image": "assets/img/service/sd-1.jpg",
+                "description": "We believe that great design is the foundation of every successful digital product. Our UI/UX design approach goes beyond visuals—we focus on building seamless, intuitive, and engaging user experiences that connect with people and drive results.",
+                "features": [
+                    "Future among us",
+                    "Make a Deal with Our Company",
+                    "Contact with Our Help Desk",
+                    "Ready to Use Solar Energy"
+                ]
+            },
+            "additional_description": "We combine creative innovation with proven user centered design principles to craft solutions that are both beautiful and functional. From wireframing and prototyping to usability testing and brand identity design, our team ensures that every detail is carefully tailored to your business goals.",
+            "faqs": [
+                {
+                    "question": "How does Detech approach User Interface (UI) design?",
+                    "answer": "Detech provides end-to-end technology solutions including web and mobile app development, full stack software solutions, cloud integration, AI-powered applications, and IT consulting."
+                },
+                {
+                    "question": "How long has Detech been in operation?",
+                    "answer": "Detech has successfully completed 16+ projects and partnered with 30+ satisfied clients across industries."
+                }
+            ]
+        },
+        {
+            "id": "ux-optimization",
+            "title": "User Experience Optimization",
+            "image": "assets/img/service/s2.jpg",
+            "description": "Our UX Optimization service focuses on improving user satisfaction by enhancing the usability, accessibility, and pleasure provided in the interaction between the user and your product.",
+            "why_choose": {
+                "image": "assets/img/service/sd-2.jpg",
+                "description": "We use data-driven approaches to optimize user journeys and create meaningful experiences that drive conversions and user retention.",
+                "features": [
+                    "Data-driven optimization",
+                    "User journey mapping",
+                    "A/B testing implementation",
+                    "Conversion rate optimization"
+                ]
+            },
+            "additional_description": "Through rigorous testing and analysis, we identify pain points and opportunities to create seamless user experiences that drive business growth.",
+            "faqs": [
+                {
+                    "question": "What methods do you use for UX optimization?",
+                    "answer": "We employ user testing, heatmaps, analytics, and A/B testing to optimize user experiences."
+                }
+            ]
+        },
+        {
+            "id": "web-development",
+            "title": "Web Development",
+            "image": "assets/img/service/s3.jpg",
+            "description": "Custom web development solutions tailored to your business needs using modern technologies and best practices.",
+            "why_choose": {
+                "image": "assets/img/service/sd-3.jpg",
+                "description": "We build scalable, secure, and high-performance web applications that drive business growth.",
+                "features": [
+                    "Responsive design",
+                    "SEO optimized",
+                    "Fast loading times",
+                    "Cross-browser compatibility"
+                ]
+            },
+            "additional_description": "Our development team uses the latest technologies to create robust web solutions.",
+            "faqs": [
+                {
+                    "question": "What technologies do you use?",
+                    "answer": "We use Laravel, Vue.js, React, and other modern frameworks."
+                }
+            ]
+        }
+    ]
+}
