@@ -45,12 +45,20 @@
 
                                 <div class="blog-description">
                                     {!! $blog->content_section_1 !!}
-                                    @if(isset($blog->blog_imgs))
+                                   @if(!empty($blog->blog_imgs) && is_array($blog->blog_imgs))
                                         <div class="blog-paired-image">
-                                            <img src="{{ Storage::disk(config('public'))->url($blog->blog_imgs[0]) }}" alt="blog image" width="768" height="700" loading="lazy">
-                                            <img src="{{ Storage::disk(config('public'))->url($blog->blog_imgs[1]) }}" alt="blog image" width="768" height="700" loading="lazy">
+                                            @foreach($blog->blog_imgs as $img)
+                                                <img 
+                                                    src="{{ Storage::disk(config('public'))->url($img) }}" 
+                                                    alt="blog image" 
+                                                    width="768" 
+                                                    height="700" 
+                                                    loading="lazy"
+                                                >
+                                            @endforeach
                                         </div>
                                     @endif
+
                                     <blockquote> {!! $blog->quote_text !!}</blockquote>
                                     {!! $blog->content_section_2 !!}
                                 </div>
