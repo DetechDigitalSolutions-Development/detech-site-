@@ -3,7 +3,7 @@
 @section('content')
     <main>
       <!-- Page Banner -->
-        @include('components.page_banner',['title'=>'Team Details'])
+        @include('components.page_banner',['title'=>'Team Details','banner_image'=>'assets/img/banner/page-banner.png'])
     <!-- Team Details -->
       <div class="team-details mt-100">
         <div class="container">
@@ -12,7 +12,7 @@
               <div class="td-media-wrap" data-aos="fade-up">
                 <div class="td-media radius18">
                   <img
-                    src="{{ asset('assets/img/team/1.jpg') }}"
+                    src="{{ Storage::disk(config('public'))->url($team->profile_img)  ?? null }}"
                     width="1000"
                     height="1133"
                     loading="lazy"
