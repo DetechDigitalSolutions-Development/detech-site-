@@ -42,11 +42,11 @@
                         ]],
                         ['Services', [
                             ['UI/UX Design', 'services.show', 'ui-design'],
-                            ['Mobile & Web Apps', 'services.show', 'mobile-web-apps'],
-                            ['Custom Platform Development', 'services.show', 'custom-platforms'],
+                            ['Mobile & Web Apps', 'services.show', 'mobile-web-design'],
+                            ['Custom Platform Development', 'services.show', 'custom-platform-development'],
                             ['AI Solutions', 'services.show', 'ai-solutions'],
                             ['Cloud & DevOps', 'services.show', 'cloud-devops'],
-                            ['AR/VR Integration', 'services.show', 'ar-vr'],
+                            ['AR/VR Integration', 'services.show', 'ar-vr-integration'],
                         ]],
                         ['Information', [
                             ['Working Process', 'about'],
