@@ -36,4 +36,8 @@ class Blog extends Model
         'categories' => 'array',
         'tags' => 'array',
     ];
+    public function comments()
+    {
+        return $this->hasMany(Comment::class);
+    }
 }

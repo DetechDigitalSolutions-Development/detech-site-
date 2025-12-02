@@ -20,7 +20,9 @@ class BlogController extends Controller
         // It returns a 404 if not found.
         // Fetch the last 4 latest blogs
         $latestBlogs = Blog::get();
+        $comments = $blog->comments()->get();
+
         
-        return view('pages.blogs.blogs_details', compact('blog', 'latestBlogs'));
+        return view('pages.blogs.blogs_details', compact('blog', 'latestBlogs','comments'));
     }
 }
