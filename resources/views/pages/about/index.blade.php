@@ -3,7 +3,7 @@
 @section('content')
 <main>
       <!-- Page Banner -->
-      @include('components.page_banner',['title'=>'About Us'])
+      @include('components.page_banner',['title'=>'About Us','banner_image'=>'assets/img/banner/page-banner.png'])
 
       <!-- Our Company -->
        @include('pages.about.our_company_section')

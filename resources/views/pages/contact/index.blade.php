@@ -3,7 +3,7 @@
 @section('content')
     <main>
       <!-- Page Banner -->
-      @include('components.page_banner',['title'=>'Contact Us'])
+      @include('components.page_banner',['title'=>'Contact Us','banner_image'=>'assets/img/banner/page-banner.png'])
 
       <!-- Contact Form -->
       <div class="section-contact-form section-padding">

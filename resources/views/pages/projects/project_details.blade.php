@@ -3,13 +3,13 @@
 @section('content')
     <main>
     <!-- Page Banner -->
-    @include('components.page_banner',['title'=>'Project Detail'])
+    @include('components.page_banner',['title'=>'Project Detail','banner_image'=>'assets/img/banner/page-banner.png'])
 
           <!-- Project Details -->
         <div class="page-project-details mt-100">
             <div class="container">
                 <div class="project-media radius18" data-aos="fade-up">
-                    <img src="{{ Storage::disk(config('public'))->url($project->featured_img) }}" width="1400" height="637" loading="lazy" alt="Image">
+                    <img src="{{ Storage::disk(config('public'))->url($project->featured_img ?? null) }}" width="1400" height="637" loading="lazy" alt="Image">
                 </div>
             </div>
             <div class="container">
@@ -22,16 +22,24 @@
 
                                 <div class="project-image-block">
                                     <div class="row product-grid">
-                                        <div class="col-md-6 col-12">
-                                            <div class="project-img radius18" data-aos="fade-up">
-                                                <img src="{{ Storage::disk(config('public'))->url($project->project_imgs[0]) }}" width="800" height="791" loading="lazy" alt="Image">
-                                            </div>
-                                        </div>
-                                        <div class="col-md-6 col-12">
-                                            <div class="project-img radius18" data-aos="fade-up" data-aos-delay="100">
-                                                <img src="{{ Storage::disk(config('public'))->url($project->project_imgs[1]) }}" width="800" height="791" loading="lazy" alt="Image">
-                                            </div>
-                                        </div>
+                                        @if(!empty($project->project_imgs) && is_array($project->project_imgs))
+                                            @foreach($project->project_imgs as $index => $img)
+                                                <div class="col-md-6 col-12">
+                                                    <div class="project-img radius18" 
+                                                        data-aos="fade-up"
+                                                        @if($index > 0) data-aos-delay="{{ $index * 100 }}" @endif>
+                                                        
+                                                        <img 
+                                                            src="{{ Storage::disk(config('public'))->url($img) }}" 
+                                                            width="800" 
+                                                            height="791" 
+                                                            loading="lazy" 
+                                                            alt="Project Image {{ $index + 1 }}"
+                                                        >
+                                                    </div>
+                                                </div>
+                                            @endforeach
+                                        @endif
                                     </div>
                                 </div>
 
@@ -89,7 +97,7 @@
                                 >
                                     <div class="media media-bg overlay">
                                     <img
-                                        src="assets/img/service/secvice-contact.jpg"
+                                        src="{{ asset('assets/img/service/service-contact.png') }}"
                                         width="1000"
                                         height="929"
                                         loading="lazy"

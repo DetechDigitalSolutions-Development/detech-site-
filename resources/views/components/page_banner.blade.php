@@ -3,14 +3,14 @@
         <picture class="media media-bg">
           <source
             media="(max-width: 575px)"
-            srcset="{{ asset('assets/img/banner/page-banner-575.jpg') }}"
+            srcset="{{ asset($banner_image) }}"
           >
           <source
             media="(max-width: 991px)"
-            srcset="{{ asset('assets/img/banner/page-banner-991.jpg') }}"
+            srcset="{{ asset($banner_image) }}"
           >
           <img
-            src="{{ asset('assets/img/banner/page-banner.jpg') }}"
+            src="{{ asset($banner_image) }}"
             width="1920"
             height="520"
             loading="eager"

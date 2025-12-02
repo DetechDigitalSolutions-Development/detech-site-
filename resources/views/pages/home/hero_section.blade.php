@@ -2,7 +2,7 @@
       <div class="hero-banner with-floating-header">
         <div class="media media-bg">
           <img
-            src="assets/img/slider/slider-bg.jpg"
+            src="assets/img/banner/home.png"
             alt="slider background"
             width="1920"
             height="100"
@@ -67,7 +67,10 @@
                   Revolutionize Your
                   <span class="decorated-text"><span>Business</span></span>
                   with 
-                  <br>AI-Power Tech
+                  <br><span class="typewriter-wrapper">
+                    <span class="typewriter-text"></span>
+                    <span class="typewriter-cursor">|</span>
+                  </span>
                 </h2>
                 <div
                   class="text text-18"
