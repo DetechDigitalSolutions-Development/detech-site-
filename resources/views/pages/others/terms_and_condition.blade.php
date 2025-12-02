@@ -3,7 +3,7 @@
 @section('content')
     <main>
       <!-- Page Banner -->
-      @include('components.page_banner',['title'=>'Terms and Conditions'])
+      @include('components.page_banner',['title'=>'Terms and Conditions','banner_image'=>'assets/img/banner/page-banner.png'])
 
          <!-- Blog List -->
       <div class="page-blog mt-100">
