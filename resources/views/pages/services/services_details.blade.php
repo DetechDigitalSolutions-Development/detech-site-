@@ -2,7 +2,7 @@
 
 @section('content')
 <main>
-    @include('components.page_banner', ['title' => $service['title']])
+    @include('components.page_banner', ['title' => $service['title'], 'banner_image' => $service['image'] ?? null])
 
     <!-- Service Details -->
     <div class="page-service-details mt-100">
@@ -59,7 +59,7 @@
                             <!-- Contact Widget -->
                             <div class="sidebar-widget service-contact radius18" data-aos="fade-up">
                                 <div class="media media-bg overlay">
-                                    <img src="{{ asset('assets/img/service/secvice-contact.jpg') }}" width="1000" height="929" loading="lazy" alt="Contact us">
+                                    <img src="{{ asset('assets/img/service/service-contact.png') }}" width="1000" height="929" loading="lazy" alt="Contact us">
                                 </div>
                                 <div class="service-contact-content">
                                     <h2 class="heading text-36">Contact with us <br>for any advice</h2>
@@ -265,11 +265,14 @@ function loadSubserviceContent(serviceId, subserviceId) {
 function updateServiceContent(subserviceData) {
     const serviceContent = document.getElementById('service-content');
     
+    // Get the base URL from a meta tag or global variable (set this in your main layout)
+    const appUrl = document.querySelector('meta[name="app-url"]')?.getAttribute('content') || window.appUrl || '';
+    
     // Update the content dynamically
     serviceContent.innerHTML = `
         <!-- Service Media -->
         <div class="details-media radius18" data-aos="fade-up">
-            <img src="${subserviceData.image}" width="1000" height="596" loading="lazy" alt="${subserviceData.title}">
+            <img src="${appUrl}/${subserviceData.image}" width="1000" height="596" loading="lazy" alt="${subserviceData.title}">
         </div>
 
         <!-- Service Title -->
@@ -283,7 +286,7 @@ function updateServiceContent(subserviceData) {
             <div class="row service-row">
                 <div class="col-xl-6 col-lg-12 col-md-6 col-12">
                     <div class="choose-us-img radius18">
-                        <img src="${subserviceData.why_choose.image}" width="1000" height="962" loading="lazy" alt="Why Choose Us">
+                        <img src="${appUrl}/${subserviceData.why_choose.image}" width="1000" height="962" loading="lazy" alt="Why Choose Us">
                     </div>
                 </div>
                 <div class="col-xl-6 col-lg-12 col-md-6 col-12">
