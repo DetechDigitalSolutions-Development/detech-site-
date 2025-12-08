@@ -1,4 +1,5 @@
 <?php
+$latest_product=getLastProduct();
 
 return [
     'menuItems' => [
@@ -21,33 +22,35 @@ return [
             'submenu' => '
                 <ul class="list-unstyled">
                     <li class="nav-item">
-                        <a class="menu-link heading fw-300" href="{{ route(\'services.index\') }}">
+                        <a class="menu-link heading fw-300" href="">
                             WHY DETECH
                         </a>
                         <ul class="reset-submenu list-unstyled submenu-color">
                             <li class="nav-item">
                                 <a class="menu-link" href="/services">
-                                    <div class="heading text-20">Become a Partner</div>
-                                    <div class="text text-14">Links customers with trusted Partners who help them realize greater value—faster—through Detech.</div>
+                                    <div class="heading text-20">Partner With Us</div>
+                                    <div class="text text-14">Collaborate with Detech to deliver powerful digital solutions and create long-term value for your clients.</div>
                                 </a>
                             </li>
+
                             <li class="nav-item">
                                 <a class="menu-link" href="/projects">
-                                    <div class="heading text-20">Case Studies</div>
-                                    <div class="text text-14">Hundreds of emerging brands thrive with Detech. Discover their journeys.</div>
+                                    <div class="heading text-20">Our Success Stories</div>
+                                    <div class="text text-14">See how businesses achieved growth and efficiency through Detech’s technology and expertise.</div>
                                 </a>
                             </li>
+
                             <li class="nav-item">
                                 <a class="menu-link" href="/products">
-                                    <div class="heading text-20">Product Development</div>
-                                    <div class="text text-14">Speed up innovation to enable quicker, effective team-driven product launches.</div>
+                                    <div class="heading text-20">Build With Confidence</div>
+                                    <div class="text text-14">Accelerate your product journey—from concept to launch—with our expert development support.</div>
                                 </a>
                             </li>
                         </ul>
                     </li>
                     <li class="nav-item">
                         <a class="menu-link heading fw-300" href="{{ route(\'projects.show\', 1) }}">
-                            FEATURED CASE STUDY
+                            FEATURED SUCCESS STORY
                         </a>
                         <ul class="reset-submenu list-unstyled submenu-color">
                             <li class="nav-item">
@@ -71,7 +74,7 @@ return [
                             </li>
                         </ul>
                     </li>
-                    <li class="nav-item megamenu-links">
+                    <!--<li class="nav-item megamenu-links">
                         <a class="menu-link text-14 fw-300" href="{{ route(\'contact\') }}">
                             <svg class="icon-18" width="20px" height="20px" viewBox="0 0 24 24" fill="none">
                                 <path d="M12 22C17.5228 22 22 17.5228 22 12C22 6.47715 17.5228 2 12 2C6.47715 2 2 6.47715 2 12C2 13.5997 2.37562 15.1116 3.04346 16.4525C3.22094 16.8088 3.28001 17.2161 3.17712 17.6006L2.58151 19.8267C2.32295 20.793 3.20701 21.677 4.17335 21.4185L6.39939 20.8229C6.78393 20.72 7.19121 20.7791 7.54753 20.9565C8.88837 21.6244 10.4003 22 12 22Z" stroke="currentColor" stroke-width="1.5"/>
@@ -98,7 +101,7 @@ return [
                             </svg>
                             Webinars
                         </a>
-                    </li>
+                    </li>-->
                 </ul>
             ',
             'menu_type' => 'header-megamenu header-submenu'
@@ -114,7 +117,13 @@ return [
             'url' => '/contact',
             'route' => 'contact',
             'submenu' => null
-        ]
+        ],
+        // [
+        //     'title' => 'Careers',
+        //     'url' => '/careers',
+        //     'route' => 'careers',
+        //     'submenu' => null
+        // ]
     ],
     'servicesMenu' => [
         'title' => 'Our Services',

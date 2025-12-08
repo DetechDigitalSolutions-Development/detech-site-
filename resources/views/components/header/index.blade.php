@@ -19,9 +19,11 @@
                                 </svg>
                             </drawer-opener>
                         </div>
-                        
+                        @php
+                            $menuItems = getMenuItems();
+                        @endphp
                         <ul class="header-menu list-unstyled">
-                            @foreach(config('menu.menuItems') as $item)
+                            @foreach($menuItems as $item)
                             <li class="nav-item {{ isset($item['submenu']) ? 'nav-item-static' : '' }}">
                                 <a class="menu-link menu-link-main {{ isset($item['submenu']) ? 'menu-accrodion' : '' }}" 
                                    href="{{ $item['url'] }}">

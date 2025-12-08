@@ -18,6 +18,8 @@ use Illuminate\Foundation\Http\Middleware\VerifyCsrfToken;
 use Illuminate\Routing\Middleware\SubstituteBindings;
 use Illuminate\Session\Middleware\StartSession;
 use Illuminate\View\Middleware\ShareErrorsFromSession;
+use App\Http\Middleware\CheckZipExtension;
+use App\Filament\Widgets;
 
 class DtAdminPanelProvider extends PanelProvider
 {
@@ -38,8 +40,8 @@ class DtAdminPanelProvider extends PanelProvider
             ])
             ->discoverWidgets(in: app_path('Filament/Widgets'), for: 'App\Filament\Widgets')
             ->widgets([
-                AccountWidget::class,
-                FilamentInfoWidget::class,
+                // AccountWidget::class,
+                // FilamentInfoWidget::class,
             ])
             ->middleware([
                 EncryptCookies::class,
@@ -51,9 +53,19 @@ class DtAdminPanelProvider extends PanelProvider
                 SubstituteBindings::class,
                 DisableBladeIconComponents::class,
                 DispatchServingFilamentEvent::class,
+                // CheckZipExtension::class,
             ])
             ->authMiddleware([
                 Authenticate::class,
             ]);
+    }
+
+    protected function getWidgets(): array
+    {
+        return [
+            Widgets\CareerStatsWidget::class,
+            Widgets\AppointmentStatsWidget::class,
+            // ... other widgets
+        ];
     }
 }

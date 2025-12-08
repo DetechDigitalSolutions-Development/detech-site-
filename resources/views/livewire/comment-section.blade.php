@@ -62,15 +62,15 @@
                             <form wire:submit.prevent="addReply" class="form contact-form">
                                 <div class="field w-half" data-aos="fade-up">
                                     <input class="text text-16" type="text" placeholder="Your Name*" wire:model="replyUserName" required>
-                                    @error('replyUserName') <span class="text-red-500 text-xs">{{ $message }}</span> @enderror
+                                    @error('replyUserName') <span class="text-danger text-xs">{{ $message }}</span> @enderror
                                 </div>
                                 <div class="field w-half" data-aos="fade-up">
                                     <input class="text text-16" type="email" placeholder="Your Email*" wire:model="replyUserEmail" required>
-                                    @error('replyUserEmail') <span class="text-red-500 text-xs">{{ $message }}</span> @enderror
+                                    @error('replyUserEmail') <span class="text-danger text-xs">{{ $message }}</span> @enderror
                                 </div>
                                 <div class="field" data-aos="fade-up">
                                     <input class="text text-16" type="text" placeholder="Your Website" wire:model="replyUserWebsite">
-                                    @error('replyUserWebsite') <span class="text-red-500 text-xs">{{ $message }}</span> @enderror
+                                    @error('replyUserWebsite') <span class="text-danger text-xs">{{ $message }}</span> @enderror
                                 </div>
                                 <div class="field" data-aos="fade-up">
                                     <textarea class="text text-16" rows="4" placeholder="Type your reply" wire:model="replyText" required></textarea>
