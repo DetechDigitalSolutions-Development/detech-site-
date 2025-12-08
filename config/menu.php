@@ -1,5 +1,4 @@
 <?php
-$latest_product=getLastProduct();
 
 return [
     'menuItems' => [
@@ -54,7 +53,7 @@ return [
                         </a>
                         <ul class="reset-submenu list-unstyled submenu-color">
                             <li class="nav-item">
-                                <a class="menu-link megamenu-image-wrap" href="/projects">
+                                <a class="menu-link megamenu-image-wrap" href="/projects/">
                                     <picture>
                                         <source media="(max-width: 575px)" srcset="assets/img/menu/575.jpg">
                                         <img src="assets/img/menu/1.jpg" width="1000" height="668" loading="lazy" alt="Hero Image">
