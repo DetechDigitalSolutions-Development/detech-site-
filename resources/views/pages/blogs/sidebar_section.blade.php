@@ -21,7 +21,7 @@
                             </div> --}}
 
                             <!-- Categories Widget -->
-                            <div class="sidebar-widget radius18" data-aos="fade-up">
+                            {{-- <div class="sidebar-widget radius18" data-aos="fade-up">
                                 <h2 class="sidebar-heading heading text-24">Categories</h2>
                                 <ul class="blog-categories list-unstyled">
                                     @foreach($blog->categories as $category)
@@ -33,7 +33,7 @@
                                     </li>
                                     @endforeach
                                 </ul>
-                            </div>
+                            </div> --}}
 
                             <!-- Recent Posts Widget -->
                             <div class="sidebar-widget radius18" data-aos="fade-up">

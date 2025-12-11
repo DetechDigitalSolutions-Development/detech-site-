@@ -61,7 +61,7 @@
                                 </svg>
                             </span>
                         </a>
-                        <a href="tel:(307)555-0133" class="hero-phone-call" aria-label="Phone number" data-aos="fade-up"
+                        <a href="tel:{{ setting('company_tel_no', $default = null) }}" class="hero-phone-call" aria-label="Phone number" data-aos="fade-up"
                             data-aos-delay="50">
                             <svg xmlns="http://www.w3.org/2000/svg" width="44" height="44" viewBox="0 0 44 44"
                                 fill="none">
@@ -72,7 +72,7 @@
                             </svg>
                             <div class="hero-call">
                                 <div class="text text-14">Need help?</div>
-                                <div class="text text-16">{{setting('company_tel_no', $default = null)}}</div>
+                                <div class="text text-16">{{ setting('company_tel_no', $default = null) }}</div>
                             </div>
                         </a>
                     </div>
