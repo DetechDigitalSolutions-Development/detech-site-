@@ -112,7 +112,7 @@ class SiteSetting extends Model
                     if (is_string($image)) {
                         // If it's just a string path
                         return [
-                            'path' => Storage::disk('public')->url($image),
+                            'path' => asset('storage/' . $image),
                             'filename' => basename($image)
                         ];
                     } elseif (is_array($image) && isset($image['path'])) {
@@ -197,7 +197,7 @@ class SiteSetting extends Model
     public function getImageUrlAttribute()
     {
         if ($this->type === 'image' && $this->value) {
-            return Storage::disk('public')->url($this->value);
+            return asset('storage/' . $this->value);
         }
         
         return null;
