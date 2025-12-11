@@ -96,7 +96,9 @@
                     @endif
                
             @empty
+            <div data-aos="fade-up">
                 <p class="text text-16">No comments yet.</p>
+            </div>
             @endforelse
         </ul>
     </div>

@@ -65,7 +65,7 @@
                             <div class="sidebar-widget radius18" data-aos="fade-up">
                                 <h2 class="sidebar-heading heading text-24">Tags</h2>
                                 <ul class="sidebar-tags list-unstyled">
-                                    @foreach($blog->tags as $tag)
+                                    @foreach($tags as $tag)
                                         <li><a class="subheading subheading-bg text-18">{{ $tag }}</a></li>
                                     @endforeach
                                 </ul>

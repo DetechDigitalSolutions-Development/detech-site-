@@ -306,7 +306,7 @@
                     </div>
                     @include(
                         'pages.blogs.sidebar_section',
-                        ['blog' => $blog],
+                        ['tags' => $blog->tags],
                         ['latestBlogs' => $latestBlogs]
                     )
                 </div>
