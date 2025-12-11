@@ -8,7 +8,7 @@
                     <div class="col-12 col-md-6">
                         <div class="footer-widget footer-widget-brand" data-aos="fade-up" data-aos-anchor=".footer-top">
                             <a class="footer-logo" href="/" aria-label="Detech Logo">
-                                <img src="{{ asset('assets/img/logo-dark.png')}}" alt="Detech Logo" width="189" height="32" loading="lazy">
+                                <img src="{{ asset('assets/img/logo-light.png')}}" alt="Detech Logo" width="189" height="32" loading="lazy">
                             </a>
                             <p class="text text-16">Each demo built with Detech will look different. You can customize almost anything in the appearance of your website with only a few clicks.</p>
                             <ul class="social-icons list-unstyled" data-aos="fade-up" data-aos-anchor=".footer-top">
