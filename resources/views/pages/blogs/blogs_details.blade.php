@@ -95,15 +95,16 @@
                                                 @endforeach
                                             </div>
                                         @endif
-
-                                        <blockquote> {!! $blog->quote_text !!}</blockquote>
+                                        
+                                        @if($blog->quote_text)
+                                            <blockquote> {!! $blog->quote_text !!}</blockquote>
+                                        @endif
                                         {!! $blog->content_section_2 !!}
                                     </div>
                                 </div>
                             </div>
                         </div>
 
-                        <!-- Share Section -->
                         <!-- Share Section -->
                         <div class="blog-share" data-aos="fade-up">
                             <div class="blog-share-item">
@@ -221,7 +222,7 @@
                             </div>
                         </div>
 
-                        {{-- <script>
+                        <script>
                             function copyToClipboard(text, element) {
                                 // Create a temporary textarea
                                 const textarea = document.createElement('textarea');
@@ -258,9 +259,9 @@
                                 // Clean up
                                 document.body.removeChild(textarea);
                             }
-                        </script> --}}
+                        </script>
 
-                        {{-- <style>
+                        <style>
                             .instagram-share {
                                 cursor: pointer;
                             }
@@ -298,7 +299,7 @@
                             .instagram-share:hover {
                                 color: #E4405F;
                             }
-                        </style> --}}
+                        </style>
 
                         <!-- include('pages.blogs.comment_section') -->
                         @livewire('comment-section', ['blog' => $blog])

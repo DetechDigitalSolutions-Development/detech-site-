@@ -68,10 +68,10 @@
                                     <input class="text text-16" type="email" placeholder="Your Email*" wire:model="replyUserEmail" required>
                                     @error('replyUserEmail') <span class="text-danger text-xs">{{ $message }}</span> @enderror
                                 </div>
-                                <div class="field" data-aos="fade-up">
+                                {{-- <div class="field" data-aos="fade-up">
                                     <input class="text text-16" type="text" placeholder="Your Website" wire:model="replyUserWebsite">
                                     @error('replyUserWebsite') <span class="text-danger text-xs">{{ $message }}</span> @enderror
-                                </div>
+                                </div> --}}
                                 <div class="field" data-aos="fade-up">
                                     <textarea class="text text-16" rows="4" placeholder="Type your reply" wire:model="replyText" required></textarea>
                                     @error('replyText') <span class="text-red-500 text-xs">{{ $message }}</span> @enderror
@@ -117,10 +117,10 @@
                 <input class="text text-16" type="email" placeholder="Your Email*" wire:model="userEmail" required>
                 @error('userEmail') <span class="text-red-500 text-xs">{{ $message }}</span> @enderror
             </div>
-            <div class="field" data-aos="fade-up">
+            {{-- <div class="field" data-aos="fade-up">
                 <input class="text text-16" type="text" placeholder="Your Website" wire:model="userWebsite">
                 @error('userWebsite') <span class="text-red-500 text-xs">{{ $message }}</span> @enderror
-            </div>
+            </div> --}}
             <div class="field" data-aos="fade-up">
                 <textarea class="text text-16" rows="4" placeholder="Type your message" wire:model="newCommentText" required></textarea>
                 @error('newCommentText') <span class="text-red-500 text-xs">{{ $message }}</span> @enderror

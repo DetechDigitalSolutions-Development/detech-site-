@@ -904,3 +904,11 @@
             padding: 0 20px 20px;
         }
     }
+
+    .attachment__caption {
+        display:none;
+    }
+    .attachment--preview {
+        pointer-events: none;
+        cursor: default;
+    }

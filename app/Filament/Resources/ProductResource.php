@@ -23,7 +23,7 @@ class ProductResource extends Resource
                 Forms\Components\TextInput::make('title')
                     ->required()
                     ->maxLength(255),
-                Forms\Components\TextArea::make('short_description')
+                Forms\Components\Textarea::make('short_description')
                     ->required()
                     ->maxLength(255),
                 Forms\Components\FileUpload::make('featured_img')
