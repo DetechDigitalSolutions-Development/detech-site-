@@ -14,8 +14,15 @@ use App\Models\ProductSite;
 use Illuminate\Support\Facades\Response;
 
 use App\Http\Controllers\CareerController;
+use App\Http\Controllers\SalaryGuideController;
 use App\Http\Livewire\CareersComponent;
 
+// Salary Guide Public Page
+Route::get('/salary-guide', [SalaryGuideController::class, 'index'])->name('salary-guide');
+// Route::get('/', [SalaryGuideController::class, 'index'])->name('home'); // Optional: make it homepage
+
+// If you want a JSON API endpoint
+Route::get('/api/salary-guide', [SalaryGuideController::class, 'apiIndex']);
 // Home
 Route::get('/', [PageController::class, 'home'])->name('home');
 
@@ -89,10 +96,17 @@ Route::get('/{slug}', function ($slug) {
     ]);
 })->where('slug', '[a-zA-Z0-9\-]+')->name('product.site');
 
+// Salary Guide Public Page
+Route::get('/salary-guides', [SalaryGuideController::class, 'index'])->name('salary-guide');
+// Route::get('/', [SalaryGuideController::class, 'index'])->name('home'); // Optional: make it homepage
+
+// If you want a JSON API endpoint
+Route::get('/api/salary-guide', [SalaryGuideController::class, 'apiIndex']);
+
 // Test routes (optional)
-Route::get('/test', function () {
-    return view('test');
-})->name('test');
+// Route::get('/test', function () {
+//     return view('test');
+// })->name('test');
 
 Route::get('/test1', function () {
     return view('test1');
