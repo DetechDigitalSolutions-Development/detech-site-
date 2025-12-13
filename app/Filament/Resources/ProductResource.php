@@ -16,6 +16,18 @@ class ProductResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-cube';
 
+    protected static ?string $navigationGroup = 'Content';
+
+    // protected static ?string $navigationLabel = null; // Hide label
+    // protected static ?string $navigationGroup = null; // Remove from group
+    // protected static ?int $navigationSort = null; // Remove sort order
+    // protected static ?string $navigationIcon = null; // Remove icon
+
+    public static function shouldRegisterNavigation(): bool
+    {
+        return false;
+    }
+
     public static function form(Form $form): Form
     {
         return $form

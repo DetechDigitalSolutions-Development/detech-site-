@@ -57,8 +57,8 @@ if (!function_exists('getRandomProduct')) {
     function getRandomProduct()
     {
         // Cache for 1 hour to improve performance
-        return cache()->remember('random_product', 3600, function () {
-            return \App\Models\Product::inRandomOrder()->first();
-        });
+        // return cache()->remember('random_product', 3600, function () {
+            return \App\Models\ProductSite::inRandomOrder()->first();
+        // });
     }
 }

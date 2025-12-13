@@ -912,3 +912,48 @@
         pointer-events: none;
         cursor: default;
     }
+
+    .yearly-price {
+    display: block;
+    margin-top: 8px;
+}
+
+.yearly-price small {
+    font-size: 14px;
+    color: #666;
+    font-weight: 400;
+}
+
+/* Add to your existing CSS file */
+.pricing-cards .product-grid {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.pricing-cards .col-12.col-lg-12.col-xl-4 {
+    display: flex;
+}
+
+.card-pricing {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+}
+
+.card-pricing .text-lists {
+    flex-grow: 1;
+}
+
+/* Mobile responsive */
+@media (max-width: 768px) {
+    .heading.text-80 {
+        font-size: 50px; /* Decreased by 20px (approx 2 steps) */
+    }
+}
+
+@media (max-width: 576px) {
+    .heading.text-80 {
+        font-size: 35px; /* Even smaller for very small screens */
+        line-height: 1.2;
+    }
+}

@@ -91,25 +91,31 @@
 
                                         <li class="nav-item">
                                             @php
-                                                $product=getRandomProduct();
+                                                $product = getRandomProduct();
+                                                // Safely get the site slug with fallback
+                                                $siteSlug = $product->site_slug ?? null;
+                                                $productUrl = $siteSlug ? route('product.site', $siteSlug) : '#';
                                             @endphp
-                                            <a class="menu-link heading fw-300" href="{{ route('products.show', $product->id) }}">
+                                            <a class="menu-link heading fw-300" href="{{ $productUrl }}">
                                                 FEATURED PRODUCT
                                             </a>
+
                                             <ul class="reset-submenu list-unstyled submenu-color">
                                                 <li class="nav-item">
                                                     <a class="menu-link megamenu-image-wrap"
-                                                        href="{{ route('products.show', $product->id) }}">
+                                                        href="{{ $productUrl }}">
                                                         <picture>
                                                             <source media="(max-width: 575px)"
                                                                 srcset="{{ asset('assets/img/menu/575.jpg') }}">
-                                                            <img src="{{ Storage::disk(config('public'))->url($product->featured_img) }}"
+                                                            <img src="{{ Storage::disk(config('public'))->url($product->featured_img ?? null )}}"
                                                                 width="1000" height="668" loading="lazy"
                                                                 alt="Hero Image">
                                                         </picture>
                                                         <div class="content">
-                                                            <div class="heading text-20">{{ $product->title }}</div>
-                                                            <div class="text text-14">{{ $product->short_description ?? null }}</div>
+                                                            <div class="heading text-20">{{ $product->product_title ?? null }}
+                                                            </div>
+                                                            <div class="text text-14">
+                                                                {{ $product->short_description ?? null }}</div>
                                                             <div class="button button--primary">
                                                                 <span class="svg-wrapper">
                                                                     <svg class="icon-20" width="20" height="20"

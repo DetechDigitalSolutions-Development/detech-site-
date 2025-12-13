@@ -3,17 +3,17 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\ProductSite;
+use App\Models\Product;
 
 class ProductController extends Controller
 {
     /**
      * Display the specified blog post.
      *
-     * @param  \App\Models\productSite  $blog
+     * @param  \App\Models\product  $blog
      * @return \Illuminate\View\View|\Illuminate\Http\RedirectResponse
      */
-    public function show(ProductSite $product)
+    public function show(product $product)
     {
         // The framework automatically fetches the blog post based on the route wildcard.
         // It returns a 404 if not found.
@@ -23,7 +23,7 @@ class ProductController extends Controller
 
     public function latest()
     {
-        $products = ProductSite::orderBy('created_at', 'desc')->take(1)->get();
+        $products = Product::orderBy('created_at', 'desc')->take(1)->get();
         return $products;
     }
 }

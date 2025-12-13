@@ -16,6 +16,8 @@ class TestimonialResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-heart';
 
+    protected static ?string $navigationGroup = 'Content Management';
+
     public static function form(Form $form): Form
     {
         return $form

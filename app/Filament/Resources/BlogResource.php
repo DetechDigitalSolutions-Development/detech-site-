@@ -18,6 +18,8 @@ class BlogResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-pencil-square';
 
+    protected static ?string $navigationGroup = 'Content';
+
     public static function form(Form $form): Form
     {
         return $form

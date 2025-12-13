@@ -9,12 +9,15 @@ use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
+use Filament\Notifications\Notification;
 
 class ProjectResource extends Resource
 {
     protected static ?string $model = Project::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-folder';
+
+    protected static ?string $navigationGroup = 'Content';
 
     public static function form(Form $form): Form
     {
@@ -23,20 +26,24 @@ class ProjectResource extends Resource
                 Forms\Components\TextInput::make('title')
                     ->required()
                     ->maxLength(255),
+                    
                 Forms\Components\FileUpload::make('featured_img')
                     ->image()
                     ->directory('featured_img/projects')
                     ->disk('public')
                     ->columnSpanFull()
                     ->nullable(),
+                    
                 Forms\Components\RichEditor::make('content_section_1')
                     ->label('Content Section 1')
                     ->nullable()
                     ->columnSpanFull(),
-                Forms\Components\RichEditor::make('content_section_2')
+                    
+                Forms\Components\RichEditor::make('content_section 2')
                     ->label('Content Section 2')
                     ->nullable()
                     ->columnSpanFull(),
+                    
                 Forms\Components\FileUpload::make('project_imgs')
                     ->label('Project Images')
                     ->directory('media/projects')
@@ -45,20 +52,69 @@ class ProjectResource extends Resource
                     ->multiple()
                     ->nullable()
                     ->columnSpanFull(),
+                    
                 Forms\Components\TextInput::make('challenge_title')
                     ->nullable(),
+                    
                 Forms\Components\TagsInput::make('challenge_points')
                     ->nullable(),
+                    
                 Forms\Components\TextInput::make('client_name')
                     ->nullable(),
+                    
+                // Start Date with validation
                 Forms\Components\DatePicker::make('start_date')
-                    ->nullable(),
+                    ->nullable()
+                    ->live()
+                    ->afterStateUpdated(function (Forms\Set $set, $state, Forms\Get $get) {
+                        $endDate = $get('end_date');
+                        
+                        if ($endDate && $state > $endDate) {
+                            // Clear end date if start is after it
+                            $set('end_date', null);
+                            
+                            // Show notification
+                            Notification::make()
+                                ->title('Invalid Start Date')
+                                ->body('Start date cannot be after end date.')
+                                ->warning()
+                                ->send();
+                        }
+                    })
+                    ->rule(function (Forms\Get $get) {
+                        return function ($attribute, $value, $fail) use ($get) {
+                            $endDate = $get('end_date');
+                            
+                            if ($endDate && $value > $endDate) {
+                                $fail('Start date must be before or equal to end date.');
+                            }
+                        };
+                    }),
+                    
+                // End Date with validation
                 Forms\Components\DatePicker::make('end_date')
-                    ->nullable(),
+                    ->nullable()
+                    ->live()
+                    ->minDate(fn (Forms\Get $get) => $get('start_date'))
+                    ->rule(function (Forms\Get $get) {
+                        return function ($attribute, $value, $fail) use ($get) {
+                            $startDate = $get('start_date');
+                            
+                            if ($startDate && $value < $startDate) {
+                                $fail('End date must be after or equal to start date.');
+                            }
+                        };
+                    })
+                    ->validationMessages([
+                        'min' => 'End date must be after or equal to start date.',
+                    ]),
+                    
                 Forms\Components\TextInput::make('owner')
                     ->nullable(),
+                    
                 Forms\Components\TagsInput::make('categories')
                     ->nullable(),
+                    
                 Forms\Components\TextInput::make('website')
                     ->nullable()
                     ->url()

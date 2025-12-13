@@ -17,8 +17,8 @@
     >
     <div class="card-project-content-absolute">
         <div class="card-project-content">
-        <h2 class="heading text-24">{{ $product->title}}</h2>
-        <p class="text text-16">{{ $product->categories[0] ?? null }}</p>
+        <h2 class="heading text-24">{{ $product->product_title}}</h2>
+        <p class="text text-16">{{ $product->short_description ?? null }}</p>
         </div>
     </div>
     <span class="svg-wrapper icon-product-link">

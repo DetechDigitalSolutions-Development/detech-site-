@@ -15,6 +15,8 @@ class ProductSite extends Model
 
     protected $fillable = [
         'product_title',
+        'featured_img', // Add this
+        'short_description', // Add this
         'site_slug',
         'site_location',
         'site_file',

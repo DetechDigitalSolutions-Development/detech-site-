@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Blog;
 use App\Models\Project;
-use App\Models\Product;
+use App\Models\ProductSite;
 use App\Models\Testimonial;
 use App\Models\Team;
 use Illuminate\View\View;
@@ -71,7 +71,7 @@ class PageController extends Controller
      */
     public function products(): View
     {
-        $products = Product::latest()->paginate(9); 
+        $products = ProductSite::latest()->paginate(9); 
         return view('pages.products.index',compact('products'));
     }
 

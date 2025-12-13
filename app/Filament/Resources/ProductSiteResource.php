@@ -2,22 +2,22 @@
 
 namespace App\Filament\Resources;
 
-use App\Models\ProductSite;
 use App\Filament\Resources\ProductSiteResource\Pages;
+use App\Models\ProductSite;
 use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
-use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 
 class ProductSiteResource extends Resource
 {
     protected static ?string $model = ProductSite::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-globe-alt';
-
+    // protected static ?string $navigationIcon = 'heroicon-o-globe-alt';
+    protected static ?string $navigationIcon = 'heroicon-o-cube';
+    protected static ?string $navigationLabel = 'Products'; 
     protected static ?string $navigationGroup = 'Content';
 
     protected static ?int $navigationSort = 20;
@@ -33,24 +33,45 @@ class ProductSiteResource extends Resource
                             ->maxLength(255)
                             ->label('Product Title')
                             ->helperText('The title of your product/site'),
-                        
+
+                        Forms\Components\FileUpload::make('featured_img')
+                            ->label('Featured Image')
+                            ->image()
+                            ->directory('product-sites/featured-images')
+                            ->maxSize(2048) // 2MB
+                            ->nullable(),
+
+                        Forms\Components\Textarea::make('short_description')
+                            ->nullable()
+                            ->rows(3)
+                            ->maxLength(500),
+
                         Forms\Components\TextInput::make('site_slug')
                             ->required()
                             ->maxLength(255)
                             ->label('Site Slug')
                             ->helperText('This will be used in the URL: ' . url('/') . '/{slug}')
+                            ->live(onBlur: true) // Add live wire
+                            ->afterStateUpdated(function ($state, Forms\Set $set, Forms\Get $get) {
+                                // Auto-generate slug when product_title changes
+                                if (empty($state) && $get('product_title')) {
+                                    $slug = Str::slug($get('product_title'));
+                                    $set('site_slug', $slug);
+                                }
+                            })
                             ->hintAction(
                                 Forms\Components\Actions\Action::make('generateSlug')
                                     ->label('Generate from Title')
                                     ->icon('heroicon-o-sparkles')
-                                    ->action(function ($state, Forms\Set $set) {
-                                        if (!empty($state)) {
-                                            $slug = Str::slug($state);
+                                    ->action(function (Forms\Get $get, Forms\Set $set) {
+                                        $title = $get('product_title');
+                                        if (!empty($title)) {
+                                            $slug = Str::slug($title);
                                             $set('site_slug', $slug);
                                         }
                                     })
                             ),
-                        
+
                         Forms\Components\Select::make('site_location')
                             ->options([
                                 'us' => 'United States',
@@ -62,14 +83,14 @@ class ProductSiteResource extends Resource
                             ->required()
                             ->label('Site Location')
                             ->default('global'),
-                        
+
                         Forms\Components\Toggle::make('is_active')
                             ->label('Active')
                             ->default(true)
                             ->helperText('Make site accessible to users'),
                     ])
                     ->columns(2),
-                
+
                 Forms\Components\Section::make('Site Files')
                     ->schema([
                         Forms\Components\FileUpload::make('site_file')
@@ -84,7 +105,7 @@ class ProductSiteResource extends Resource
                                 $set('extracted_path', null);
                             })
                             ->helperText('Upload a zip file containing your website (max 100MB). Should include index.html/index.php in root.'),
-                        
+
                         Forms\Components\Placeholder::make('extracted_info')
                             ->label('Extraction Status')
                             ->content(function ($get) {
@@ -94,9 +115,10 @@ class ProductSiteResource extends Resource
                                 if ($get('site_file')) {
                                     return '⚠️ Zip file uploaded but not extracted yet';
                                 }
+
                                 return 'No zip file uploaded';
                             })
-                            ->hidden(fn ($get) => !$get('site_file')),
+                            ->hidden(fn ($get) => ! $get('site_file')),
                     ])
                     ->hidden(fn ($operation) => $operation === 'edit'),
             ]);
@@ -109,7 +131,9 @@ class ProductSiteResource extends Resource
                 Tables\Columns\TextColumn::make('product_title')
                     ->searchable()
                     ->sortable(),
-                
+
+                Tables\Columns\ImageColumn::make('featured_img'),
+
                 Tables\Columns\TextColumn::make('site_slug')
                     ->label('Slug')
                     ->searchable()
@@ -117,7 +141,7 @@ class ProductSiteResource extends Resource
                     ->copyable()
                     ->copyMessage('Slug copied!')
                     ->copyMessageDuration(1500),
-                
+
                 Tables\Columns\BadgeColumn::make('site_location')
                     ->colors([
                         'success' => 'global',
@@ -126,26 +150,26 @@ class ProductSiteResource extends Resource
                         'danger' => 'asia',
                         'gray' => 'custom',
                     ]),
-                
+
                 Tables\Columns\IconColumn::make('is_active')
                     ->boolean()
                     ->label('Active'),
-                
+
                 Tables\Columns\TextColumn::make('site_file')
                     ->label('Zip File')
                     ->formatStateUsing(fn ($state) => $state ? '✅ Uploaded' : '❌ Missing')
                     ->alignCenter(),
-                
+
                 Tables\Columns\TextColumn::make('extracted_path')
                     ->label('Extracted')
                     ->formatStateUsing(fn ($state) => $state ? '✅ Yes' : '❌ No')
                     ->alignCenter(),
-                
+
                 Tables\Columns\TextColumn::make('created_at')
                     ->dateTime()
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
-                
+
                 Tables\Columns\TextColumn::make('updated_at')
                     ->dateTime()
                     ->sortable()
@@ -160,10 +184,10 @@ class ProductSiteResource extends Resource
                         'global' => 'Global',
                         'custom' => 'Custom Location',
                     ]),
-                
+
                 Tables\Filters\TernaryFilter::make('is_active')
                     ->label('Active Status'),
-                
+
                 Tables\Filters\TernaryFilter::make('has_extracted')
                     ->label('Extracted Files')
                     ->queries(
@@ -178,45 +202,45 @@ class ProductSiteResource extends Resource
                     ->color('success')
                     ->url(fn (ProductSite $record) => $record->site_url)
                     ->openUrlInNewTab()
-                    ->hidden(fn (ProductSite $record) => !$record->extracted_path),
-                
+                    ->hidden(fn (ProductSite $record) => ! $record->extracted_path),
+
                 Tables\Actions\Action::make('extract')
                     ->label('Extract')
                     ->icon('heroicon-o-archive-box')
                     ->color('warning')
                     ->action(function (ProductSite $record) {
                         try {
-                            if (!$record->site_file) {
+                            if (! $record->site_file) {
                                 throw new \Exception('No zip file uploaded');
                             }
-                            
-                            $zipPath = storage_path('app/public/' . $record->site_file);
-                            
-                            if (!file_exists($zipPath)) {
+
+                            $zipPath = storage_path('app/public/'.$record->site_file);
+
+                            if (! file_exists($zipPath)) {
                                 throw new \Exception('Zip file not found');
                             }
-                            
+
                             $extractedPath = $record->processZipFile($zipPath);
-                            
+
                             // Check if index file exists
                             $indexFile = $record->getIndexFilePath();
-                            
-                            if (!$indexFile) {
+
+                            if (! $indexFile) {
                                 throw new \Exception('No index.html or index.php found in root directory');
                             }
-                            
+
                             return redirect()->back()->with('success', 'Site extracted successfully!');
-                            
+
                         } catch (\Exception $e) {
-                            return redirect()->back()->with('error', 'Failed to extract: ' . $e->getMessage());
+                            return redirect()->back()->with('error', 'Failed to extract: '.$e->getMessage());
                         }
                     })
                     ->requiresConfirmation()
                     ->modalHeading('Extract Zip File')
                     ->modalSubheading('This will extract the uploaded zip file and make the site accessible.')
                     ->modalButton('Extract Now')
-                    ->hidden(fn (ProductSite $record) => !$record->site_file || $record->extracted_path),
-                
+                    ->hidden(fn (ProductSite $record) => ! $record->site_file || $record->extracted_path),
+
                 Tables\Actions\EditAction::make(),
                 Tables\Actions\DeleteAction::make()
                     ->before(function (ProductSite $record) {

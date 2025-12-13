@@ -49,20 +49,22 @@
                                   innovation, and integrity, we deliver solutions that create real business impact not
                                   just completed projects.
                               </p>
-                              <div class="buttons" data-aos="fade-up">
-                                  <a href="{{ route('about') }}" class="button button--primary"
-                                      aria-label="More About Us">
-                                      More About Us
-                                      <span class="svg-wrapper">
-                                          <svg class="icon-20" width="20" height="20" viewBox="0 0 20 20"
-                                              fill="none" xmlns="http://www.w3.org/2000/svg">
-                                              <path
-                                                  d="M13.3365 7.84518L6.16435 15.0173L4.98584 13.8388L12.158 6.66667H5.83652V5H15.0032V14.1667H13.3365V7.84518Z"
-                                                  fill="CurrentColor" />
-                                          </svg>
-                                      </span>
-                                  </a>
-                              </div>
+                              @if (request()->route()->getName() !== 'about')
+                                  <div class="buttons" data-aos="fade-up">
+                                      <a href="{{ route('about') }}" class="button button--primary"
+                                          aria-label="More About Us">
+                                          More About Us
+                                          <span class="svg-wrapper">
+                                              <svg class="icon-20" width="20" height="20" viewBox="0 0 20 20"
+                                                  fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                  <path
+                                                      d="M13.3365 7.84518L6.16435 15.0173L4.98584 13.8388L12.158 6.66667H5.83652V5H15.0032V14.1667H13.3365V7.84518Z"
+                                                      fill="CurrentColor" />
+                                              </svg>
+                                          </span>
+                                      </a>
+                                  </div>
+                              @endif
 
                               <div class="choose-logo">
                                   <div class="choose-rotating-logo svg-wrapper" data-aos="zoom-in-up">
@@ -178,7 +180,7 @@
                                               d="M82.0487 10.1068L82.2242 11.5099L76.5097 12.2248L76.3342 10.8216L82.0487 10.1068Z"
                                               fill="#1C2539" />
                                       </svg>
-                                      <span class="text-abs">{{now()->year - 2023}}</span>
+                                      <span class="text-abs">{{ now()->year - 2023 }}</span>
                                   </div>
                               </div>
                           </div>
