@@ -52,7 +52,7 @@
 
                             </div>
                             <div class="project-challenge">
-                                <h2 class="heading text-36" data-aos="fade-up">The Challenge Of Project</h2>
+                                <h2 class="heading text-36" data-aos="fade-up">{{  $project->challenge_title ?? 'The Challenge Of Project'}}</h2>
                                 <ul class="challenge-list list-unstyled">
                                     @foreach ($project->challenge_points as $point)
                                         <li class="challenge-item" data-aos="fade-up">
