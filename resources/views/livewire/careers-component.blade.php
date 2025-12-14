@@ -28,8 +28,13 @@
                 @endforeach
             </div>
         </div>
-
-        <button type="button" class="button button--primary" wire:click="resetFilters">
+    <style>
+        /* .button--reset {
+            min-width: 100px;
+            width: 10%;
+        } */
+    </style>
+        <button type="button" class="button button--primary button--reset" wire:click="resetFilters" >
             Reset
         </button>
     </form>
@@ -43,7 +48,7 @@
     </button>
 
     @foreach ($categories as $category => $count)
-        <button class="button button--primary {{ $selectedCategory === $category ? 'active' : '' }}"
+        <button class="button button--primary m-2 {{ $selectedCategory === $category ? 'active' : '' }}"
             wire:click="selectCategory('{{ $category }}')">
             {{ $category }}
             <span class="svg-wrapper">{{ $count }}</span>

@@ -41,7 +41,10 @@
 
     <!-- <link href="{{ asset('css/app.css') }}" rel="stylesheet"> -->
     <style>
-        
+        .button--reset {
+     min-width: 100px;
+    width: 100%;
+}
     </style>
 
     <script>

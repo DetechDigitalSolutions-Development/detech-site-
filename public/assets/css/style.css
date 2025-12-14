@@ -410,6 +410,11 @@ h6,
   border: var(--style-border-width-buttons-primary) solid var(--color-primary-button-border);
   border-radius: var(--style-border-radius-buttons-primary); }
 
+.button--reset {
+    min-width: 100px;
+    width: 10%;
+}
+
 .button--primary:focus,
 .button--primary:hover {
   outline: none;
