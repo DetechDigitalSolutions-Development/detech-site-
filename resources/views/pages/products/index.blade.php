@@ -6,9 +6,9 @@
       @include('components.page_banner',['title'=>'Our Products','banner_image'=>'assets/img/banner/page-banner.png'])
 
       <!-- products -->
-      <div class="page-products mt-100">
+      <div class="page-projects mt-100">
         <div class="container-fluid">
-          <div class="row product-grid">
+          <div class="row project-grid">
             @foreach($products as $product)
               @include('components.cards.products_card',['product'=>$product])
             @endforeach
