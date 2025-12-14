@@ -37,7 +37,7 @@ class ProductSiteResource extends Resource
                         Forms\Components\FileUpload::make('featured_img')
                             ->label('Featured Image')
                             ->image()
-                            ->directory('product-sites/featured-images')
+                            ->directory('featured_img/product-sites')
                             ->maxSize(2048) // 2MB
                             ->nullable(),
 

@@ -8,7 +8,7 @@
       <!-- Projects -->
       <div class="page-projects mt-100">
         <div class="container-fluid">
-          <div class="row product-grid">
+          <div class="row project-grid">
             @foreach($projects as $project)
               @include('components.cards.projects_card',['project'=>$project])
             @endforeach

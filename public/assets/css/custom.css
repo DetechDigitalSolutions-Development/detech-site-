@@ -957,3 +957,28 @@
         line-height: 1.2;
     }
 }
+
+/* Minimal equal height solution */
+.testimonial-swiper .swiper-wrapper {
+    align-items: stretch; /* Key property */
+}
+
+.testimonial-swiper .swiper-slide {
+    height: auto;
+}
+
+.card-testimonial {
+    height: 100%; /* Make card take full slide height */
+    display: flex;
+    flex-direction: column;
+    padding: 40px;
+}
+
+.card-testimonial .text-24 {
+    flex: 1; /* Make testimonial text expand */
+    margin-bottom: 30px;
+}
+
+.card-testimonial .user-info-wrap {
+    margin-top: auto; /* Push user info to bottom */
+}
