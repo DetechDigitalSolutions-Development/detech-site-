@@ -10,7 +10,7 @@
                             <a class="footer-logo" href="/" aria-label="Detech Logo">
                                 <img src="{{ asset('assets/img/logo-light.png')}}" alt="Detech Logo" width="189" height="32" loading="lazy">
                             </a>
-                            <p class="text text-16">Each demo built with Detech will look different. You can customize almost anything in the appearance of your website with only a few clicks.</p>
+                            <p class="text text-16">We streamline your digital transformation with custom software and AI-driven solutions, delivering impactful results and seamless user experiences through our expert team.</p>
                             <ul class="social-icons list-unstyled" data-aos="fade-up" data-aos-anchor=".footer-top">
                                 @php
                                     // Define social media links with settings

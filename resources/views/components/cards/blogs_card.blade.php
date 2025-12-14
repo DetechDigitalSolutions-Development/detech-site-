@@ -33,7 +33,7 @@
             @endif
             <div class="media">
                 <img
-                    src="{{ asset('storage/' . $blog->featured_img) }}"
+                    src="{{ Storage::disk(config('public'))->url($blog->featured_img) ?? asset('assets/img/blog/1.jpg') }}"
                     alt="{{ $blog->title }}"
                     width="1000"
                     height="707"

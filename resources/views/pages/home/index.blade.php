@@ -23,11 +23,13 @@
 
       <!-- Testimonial -->
       @include('pages.home.testimonials_section',['testimonials' => $testimonials])
+
+      <!-- Featured Blog -->
+      @include('pages.home.featured_blogs_section',['blogs' => $latestBlogs])
       
       <!-- FAQ -->
       @include('components.faq')
 
-      <!-- Featured Blog -->
-      @include('pages.home.featured_blogs_section',['blogs' => $latestBlogs])
+      
     </main>
 @endsection
