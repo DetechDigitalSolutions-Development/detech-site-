@@ -38,6 +38,8 @@ class TestimonialResource extends Resource
                 Forms\Components\TextInput::make('rating')
                     ->numeric()
                     ->inputMode('decimal')
+                    ->maxValue(5)
+                    ->minValue(1)
                     ->required(),
             ]);
     }
@@ -51,6 +53,8 @@ class TestimonialResource extends Resource
                 Tables\Columns\TextColumn::make('designation')
                     ->searchable(),
                 Tables\Columns\ImageColumn::make('profile_img'),
+                Tables\Columns\TextColumn::make('rating')
+                    ->formatStateUsing(fn (string $state): string => str_repeat('⭐', (int)$state)),
                 Tables\Columns\TextColumn::make('created_at')
                     ->dateTime()
                     ->sortable()

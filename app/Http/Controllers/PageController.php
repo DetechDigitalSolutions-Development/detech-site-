@@ -24,7 +24,7 @@ class PageController extends Controller
         $testimonials = Testimonial::get();
 
         // Fetch the last 4 latest blogs
-        $latestBlogs = Blog::latest()->take(4)->get();
+        $latestBlogs = Blog::latest()->take(3)->get();
 
         $services = (new ServiceController)->getServicesData()['services'] ?? [];
 
