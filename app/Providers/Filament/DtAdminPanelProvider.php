@@ -20,6 +20,7 @@ use Illuminate\Session\Middleware\StartSession;
 use Illuminate\View\Middleware\ShareErrorsFromSession;
 use App\Http\Middleware\CheckZipExtension;
 use App\Filament\Widgets;
+use Filament\Support\Enums\MaxWidth;
 
 class DtAdminPanelProvider extends PanelProvider
 {
@@ -31,8 +32,12 @@ class DtAdminPanelProvider extends PanelProvider
             ->path('dt_admin')
             ->login()
             ->colors([
-                'primary' => Color::Amber,
+                'primary' => Color::Blue,
+                'secondary' => Color::Gray,
             ])
+            ->brandLogo(asset('assets/img/logo-dark.png'), true) // Second parameter makes it lazy-loaded
+            ->brandLogoHeight('1.5rem') // Adjust logo size
+            ->favicon(asset('assets/img/favicon.png')) // Add favicon
             ->discoverResources(in: app_path('Filament/Resources'), for: 'App\Filament\Resources')
             ->discoverPages(in: app_path('Filament/Pages'), for: 'App\Filament\Pages')
             ->pages([
@@ -57,7 +62,10 @@ class DtAdminPanelProvider extends PanelProvider
             ])
             ->authMiddleware([
                 Authenticate::class,
-            ]);
+            ])
+            ->sidebarCollapsibleOnDesktop()
+            ->sidebarFullyCollapsibleOnDesktop()
+            ->maxContentWidth(MaxWidth::Full);
     }
 
     protected function getWidgets(): array
