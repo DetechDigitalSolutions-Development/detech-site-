@@ -36,12 +36,12 @@ class ProjectResource extends Resource
                     
                 Forms\Components\RichEditor::make('content_section_1')
                     ->label('Content Section 1')
-                    ->nullable()
+                    // ->nullable()
                     ->columnSpanFull(),
                     
-                Forms\Components\RichEditor::make('content_section 2')
+                Forms\Components\RichEditor::make('content_section_2')
                     ->label('Content Section 2')
-                    ->nullable()
+                    // ->nullable()
                     ->columnSpanFull(),
                     
                 Forms\Components\FileUpload::make('project_imgs')
