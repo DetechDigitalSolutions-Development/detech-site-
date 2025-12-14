@@ -1,5 +1,28 @@
 {{-- resources/views/livewire/show-blog-comments.blade.php --}}
 <div wire:ignore.self>
+    <!-- Toast Notification Container -->
+    <div class="toast-container">
+        @if ($successMessage)
+            <div class="toast-notification toast-success" data-aos="fade-up" data-aos-delay="100">
+                <div class="toast-icon">
+                    <svg class="icon-24" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                        <path d="M12 2C6.48 2 2 6.48 2 12C2 17.52 6.48 22 12 22C17.52 22 22 17.52 22 12C22 6.48 17.52 2 12 2ZM10 17L5 12L6.41 10.59L10 14.17L17.59 6.58L19 8L10 17Z" 
+                              fill="currentColor"/>
+                    </svg>
+                </div>
+                <div class="toast-content">
+                    <div class="toast-title">Success!</div>
+                    <div class="toast-message">{{ $successMessage }}</div>
+                </div>
+                <button class="toast-close" wire:click="$set('successMessage', null)">
+                    <svg class="icon-16" width="16" height="16" viewBox="0 0 16 16" fill="none">
+                        <path d="M12.6667 4.27333L11.7267 3.33333L8 7.06L4.27333 3.33333L3.33333 4.27333L7.06 8L3.33333 11.7267L4.27333 12.6667L8 8.94L11.7267 12.6667L12.6667 11.7267L8.94 8L12.6667 4.27333Z" 
+                              fill="currentColor"/>
+                    </svg>
+                </button>
+            </div>
+        @endif
+    </div>
     <div class="comments-section scroll-margin" id="blog-comments">
         <h2 class="comment-section-heading heading text-36" data-aos="fade-up">{{ $comments->count() }} Comments</h2>
         <ul class="comments-area list-unstyled">
@@ -137,11 +160,11 @@
         </form>
 
         {{-- Success Message --}}
-        @if ($successMessage)
+        {{-- @if ($successMessage)
             <div class="mt-4 p-3 bg-green-100 text-green-700 rounded-md" data-aos="fade-up">
                 {{ $successMessage }}
             </div>
-        @endif
+        @endif --}}
     </div>
     @endif
 </div>
@@ -174,6 +197,71 @@
                 section.scrollIntoView({ behavior: 'smooth', block: 'start' });
             }
         }, 100);
+    });
+</script>
+@endscript
+@script
+<script>
+    // Listen for Livewire events after comment/reply submission
+    Livewire.on('comment-added', () => {
+        clearMainCommentForm();
+        clearSuccessMessageAfterDelay();
+    });
+
+    Livewire.on('reply-added', () => {
+        clearReplyForm();
+        clearMainCommentForm(); // in case reply form was open
+        clearSuccessMessageAfterDelay();
+    });
+
+    // Clear main comment form fields
+    function clearMainCommentForm() {
+        document.querySelectorAll('[wire\\:model="userName"], [wire\\:model="userEmail"], [wire\\:model="newCommentText"]').forEach(input => {
+            if (input.type === 'text' || input.type === 'email' || input.tagName === 'TEXTAREA') {
+                input.value = '';
+                // Trigger input event so Livewire notices the change
+                input.dispatchEvent(new Event('input', { bubbles: true }));
+            }
+        });
+    }
+
+    // Clear reply form fields (when replying to a specific comment)
+    function clearReplyForm() {
+        document.querySelectorAll('[wire\\:model="replyUserName"], [wire\\:model="replyUserEmail"], [wire\\:model="replyText"]').forEach(input => {
+            if (input.type === 'text' || input.type === 'email' || input.tagName === 'TEXTAREA') {
+                input.value = '';
+                input.dispatchEvent(new Event('input', { bubbles: true }));
+            }
+        });
+
+        // Also remove any active reply form from DOM view (in case it's still visible due to delay)
+        const activeReplyForm = document.querySelector('.reply-form');
+        if (activeReplyForm) {
+            activeReplyForm.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        }
+    }
+
+    // Optional: Auto-hide success toast after 5 seconds
+    function clearSuccessMessageAfterDelay() {
+        setTimeout(() => {
+            const toast = document.querySelector('.toast-success');
+            if (toast) {
+                toast.style.opacity = '0';
+                toast.style.transition = 'opacity 0.5s';
+                setTimeout(() => {
+                    if (toast.parentElement) {
+                        toast.parentElement.removeChild(toast);
+                    }
+                }, 500);
+            }
+        }, 5000);
+    }
+
+    // Also clear forms when "Cancel" is clicked (just in case)
+    document.addEventListener('click', function(e) {
+        if (e.target && e.target.closest('button[wire\\:click="cancelReply"]')) {
+            setTimeout(clearReplyForm, 100);
+        }
     });
 </script>
 @endscript

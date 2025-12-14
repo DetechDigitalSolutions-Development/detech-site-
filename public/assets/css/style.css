@@ -5809,3 +5809,244 @@ footer .social-link:hover {
     padding-block-start: 60px; } }
 
   
+        /* Toast Notification Styles */
+.toast-container {
+    position: fixed;
+    top: 100px;
+    right: 20px;
+    z-index: 9999;
+    max-width: 400px;
+    width: 100%;
+    pointer-events: none;
+}
+
+@media (max-width: 768px) {
+    .toast-container {
+        top: 80px;
+        right: 10px;
+        left: 10px;
+        max-width: none;
+    }
+}
+
+.toast-notification {
+    pointer-events: all;
+    background: white;
+    border-radius: 12px;
+    padding: 20px;
+    margin-bottom: 16px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+    border-left: 4px solid;
+    display: flex;
+    align-items: flex-start;
+    gap: 16px;
+    animation: slideInRight 0.3s ease-out, fadeOut 0.3s ease-out 4.7s forwards;
+    transform-origin: center;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.toast-notification:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2);
+}
+
+/* Success Toast */
+.toast-success {
+    border-left-color: #10b981;
+    background: linear-gradient(135deg, #f0fdf4 0%, #ffffff 100%);
+}
+
+.toast-success .toast-icon {
+    color: #10b981;
+}
+
+/* Info Toast (if needed later) */
+.toast-info {
+    border-left-color: #3b82f6;
+    background: linear-gradient(135deg, #eff6ff 0%, #ffffff 100%);
+}
+
+.toast-info .toast-icon {
+    color: #3b82f6;
+}
+
+/* Warning Toast (if needed later) */
+.toast-warning {
+    border-left-color: #f59e0b;
+    background: linear-gradient(135deg, #fffbeb 0%, #ffffff 100%);
+}
+
+.toast-warning .toast-icon {
+    color: #f59e0b;
+}
+
+/* Error Toast (if needed later) */
+.toast-error {
+    border-left-color: #ef4444;
+    background: linear-gradient(135deg, #fef2f2 0%, #ffffff 100%);
+}
+
+.toast-error .toast-icon {
+    color: #ef4444;
+}
+
+.toast-icon {
+    flex-shrink: 0;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(255, 255, 255, 0.8);
+}
+
+.toast-success .toast-icon {
+    background: rgba(16, 185, 129, 0.1);
+}
+
+.toast-content {
+    flex: 1;
+    min-width: 0;
+}
+
+.toast-title {
+    font-size: 16px;
+    font-weight: 600;
+    margin-bottom: 4px;
+    color: #111827;
+}
+
+.toast-success .toast-title {
+    color: #065f46;
+}
+
+.toast-message {
+    font-size: 14px;
+    line-height: 1.5;
+    color: #6b7280;
+}
+
+.toast-success .toast-message {
+    color: #047857;
+}
+
+.toast-close {
+    flex-shrink: 0;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: transparent;
+    border: none;
+    color: #9ca3af;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    margin-left: auto;
+}
+
+.toast-close:hover {
+    background: rgba(0, 0, 0, 0.05);
+    color: #374151;
+}
+
+.toast-success .toast-close:hover {
+    background: rgba(16, 185, 129, 0.1);
+    color: #065f46;
+}
+
+/* Progress Bar (Optional) */
+.toast-notification::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    height: 3px;
+    background: currentColor;
+    opacity: 0.3;
+    animation: progressBar 5s linear forwards;
+}
+
+.toast-success::after {
+    background: #10b981;
+}
+
+/* Animations */
+@keyframes slideInRight {
+    from {
+        transform: translateX(100%);
+        opacity: 0;
+    }
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+@keyframes slideInLeft {
+    from {
+        transform: translateX(-100%);
+        opacity: 0;
+    }
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+@keyframes fadeOut {
+    from {
+        opacity: 1;
+        transform: translateX(0);
+    }
+    to {
+        opacity: 0;
+        transform: translateX(100%);
+    }
+}
+
+@keyframes progressBar {
+    from {
+        width: 100%;
+    }
+    to {
+        width: 0%;
+    }
+}
+
+/* Mobile Optimizations */
+@media (max-width: 768px) {
+    .toast-notification {
+        padding: 16px;
+        gap: 12px;
+        border-radius: 10px;
+    }
+    
+    .toast-icon {
+        width: 32px;
+        height: 32px;
+    }
+    
+    .toast-title {
+        font-size: 15px;
+    }
+    
+    .toast-message {
+        font-size: 13px;
+    }
+}
+
+/* Accessibility */
+.toast-notification:focus {
+    outline: 2px solid #3b82f6;
+    outline-offset: 2px;
+}
+
+.toast-close:focus {
+    outline: 2px solid #3b82f6;
+    outline-offset: 2px;
+}

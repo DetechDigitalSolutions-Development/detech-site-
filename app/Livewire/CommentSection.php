@@ -71,8 +71,9 @@ class CommentSection extends Component
         ]);
 
         $this->reset(['userName', 'userEmail', 'userWebsite', 'newCommentText']);
-        $this->successMessage = 'Comment added successfully!';
+        $this->successMessage = 'Comment added successfully! Wait for approval.';
         $this->loadComments();
+        $this->dispatch('comment-added');
     }
 
     public function startReply($commentId)
@@ -112,8 +113,9 @@ class CommentSection extends Component
         ]);
 
         $this->reset(['replyToCommentId', 'replyUserName', 'replyUserEmail', 'replyUserWebsite', 'replyText']);
-        $this->successMessage = 'Reply added successfully!';
+        $this->successMessage = 'Reply added successfully! Wait for approval.';
         $this->loadComments();
+        $this->dispatch('comment-added');
     }
 
     public function render()
