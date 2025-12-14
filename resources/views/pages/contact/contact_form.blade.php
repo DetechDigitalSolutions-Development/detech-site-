@@ -1,10 +1,10 @@
-<div class="col-12 col-lg-6 col-contact-form">
+<div class="col-12 col-lg-6 col-contact-form" data-aos="fade-up">
     <div class="contact-form-wrap radius18">
         <div class="contact-form-headings">
             <h2 class="heading text-32" data-aos="fade-up">
                 Make an Appointment
             </h2>
-            <p class="text text-16" data-aos="fade-up">
+            <p class="heading text-14 mt-4" data-aos="fade-up">
                 Feel free to contact with us, we don't spam your email
             </p>
         </div>
@@ -16,7 +16,7 @@
             </div>
         @endif
         <!-- Flash message integration ends here -->
-        <form action="{{ route('appointments.store') }}" method="POST" class="form contact-form" data-aos="fade-up">
+        <form action="{{ route('appointments.store') }}" method="POST" class="form contact-form " data-aos="fade-up">
             @csrf
             <div class="field">
                 <label for="ContactForm-name" class="visually-hidden">
