@@ -65,8 +65,10 @@ class SalaryGuideResource extends Resource
             ->columns([
                 Tables\Columns\TextColumn::make('role')->sortable(),
                 Tables\Columns\TextColumn::make('salaryRates_count')
-                    ->counts('salaryRates')
-                    ->label('Rate Entries'),
+                ->label('Rate Entries')
+                ->getStateUsing(function ($record) {
+                    return $record->salaryRates()->count();
+                }),
                 Tables\Columns\IconColumn::make('is_active')
                     ->boolean(),
                 Tables\Columns\TextColumn::make('order')->sortable(),
@@ -92,15 +94,15 @@ class SalaryGuideResource extends Resource
     }
 
     // app/Filament/Resources/CurrencyResource.php (or any resource)
-public static function getNavigationBadge(): ?string
-{
-    return 'View';
-}
+// public static function getNavigationBadge(): ?string
+// {
+//     return 'View';
+// }
 
-public static function getNavigationBadgeColor(): ?string
-{
-    return 'success';
-}
+// public static function getNavigationBadgeColor(): ?string
+// {
+//     return 'success';
+// }
 
 // Add this method to add a link to the public page
 public static function getNavigationItems(): array
@@ -109,7 +111,8 @@ public static function getNavigationItems(): array
         parent::getNavigationItems(),
         [
             \Filament\Navigation\NavigationItem::make()
-                ->label('View Public Page')
+            ->group('Salary Guide')
+                ->label('View Salary Guide Page')
                 ->icon('heroicon-o-eye')
                 ->url('/salary-guide', shouldOpenInNewTab: true)
                 ->sort(999),

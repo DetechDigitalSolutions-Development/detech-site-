@@ -25,6 +25,12 @@ class SalaryGuideController extends Controller
             ->orderBy('order')
             ->get();
         
+        // Get base currency (first in order)
+        $baseCurrency = $currencies->first();
+        $baseCurrencyCode = $baseCurrency ? $baseCurrency->code : 'PHP';
+        $baseCurrencySymbol = $baseCurrency ? $baseCurrency->symbol : '₱';
+        $baseCurrencyLabel = $baseCurrency ? $baseCurrency->label : 'Philippine Peso';
+        
         // Calculate converted rates
         $salaryData = [];
         foreach ($salaryGuides as $guide) {
@@ -33,26 +39,44 @@ class SalaryGuideController extends Controller
                 $rate = $guide->salaryRates->where('experience_level_id', $level->id)->first();
                 if ($rate) {
                     $convertedRates = [];
+                    
+                    // Store base currency rate (rate in PHP from database)
+                    $phpMin = $rate->min_rate;
+                    $phpMax = $rate->max_rate;
+                    
                     foreach ($currencies as $currency) {
-                        $exchangeRate = $currency->exchange_rate;
-                        $min = round($rate->min_rate * $exchangeRate);
-                        $max = round($rate->max_rate * $exchangeRate);
+                        if ($currency->code === $baseCurrencyCode) {
+                            // This is the base currency - use direct values
+                            $min = round($phpMin);
+                            $max = round($phpMax);
+                        } else {
+                            // Convert from PHP to target currency
+                            // If exchange_rate is PHP to target, multiply; if target to PHP, divide
+                            // Assuming exchange_rate is target currency per 1 PHP
+                            $exchangeRate = $currency->exchange_rate;
+                            $min = round($phpMin * $exchangeRate);
+                            $max = round($phpMax * $exchangeRate);
+                        }
                         
                         $convertedRates[$currency->code] = [
                             'min' => $this->formatNumber($min),
                             'max' => $this->formatNumber($max),
                             'symbol' => $currency->symbol,
                             'label' => $currency->label,
+                            'is_base' => $currency->code === $baseCurrencyCode,
+                            'exchange_rate' => $currency->exchange_rate,
                         ];
                     }
                     
                     $guideRates[] = [
                         'level' => $level->name,
                         'description' => $level->description,
-                        'php_rate' => [
-                            'min' => $this->formatNumber($rate->min_rate),
-                            'max' => $this->formatNumber($rate->max_rate),
-                            'formatted' => '₱' . $this->formatNumber($rate->min_rate) . ' - ₱' . $this->formatNumber($rate->max_rate)
+                        'base_rate' => [
+                            'min' => $this->formatNumber($phpMin),
+                            'max' => $this->formatNumber($phpMax),
+                            'formatted' => $baseCurrencySymbol . $this->formatNumber($phpMin) . ' - ' . $baseCurrencySymbol . $this->formatNumber($phpMax),
+                            'currency_code' => $baseCurrencyCode,
+                            'currency_label' => $baseCurrencyLabel,
                         ],
                         'converted_rates' => $convertedRates,
                     ];
@@ -65,10 +89,14 @@ class SalaryGuideController extends Controller
             ];
         }
         
-        return view('pages.salary-guide.index', compact('salaryData')
-            + compact('experienceLevels')
-            + compact('currencies')            
-            );
+        return view('pages.salary-guide.index', compact(
+            'salaryData',
+            'experienceLevels',
+            'currencies',
+            'baseCurrencyCode',
+            'baseCurrencySymbol',
+            'baseCurrencyLabel'
+        ));
     }
     
     /**
@@ -85,10 +113,14 @@ class SalaryGuideController extends Controller
             ->orderBy('order')
             ->get();
         
+        // Get base currency
+        $baseCurrency = $currencies->first();
+        
         return response()->json([
             'experience_levels' => $experienceLevels,
             'currencies' => $currencies,
             'salary_guides' => $salaryGuides,
+            'base_currency' => $baseCurrency,
         ]);
     }
     
