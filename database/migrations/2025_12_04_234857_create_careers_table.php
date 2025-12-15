@@ -11,7 +11,7 @@ return new class extends Migration
         Schema::create('careers', function (Blueprint $table) {
             $table->id();
             $table->string('job_title');
-            $table->enum('job_type', ['onsite', 'hybrid', 'online']);
+            $table->enum('job_type', ['onsite', 'hybrid', 'remote']);
             $table->string('job_location');
             $table->string('job_category');
             $table->text('job_content');

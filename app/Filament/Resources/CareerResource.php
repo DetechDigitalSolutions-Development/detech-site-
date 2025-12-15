@@ -42,9 +42,6 @@ class CareerResource extends Resource
                                         'onsite' => 'Onsite',
                                         'remote' => 'Remote',
                                         'hybrid' => 'Hybrid',
-                                        'contract' => 'Contract',
-                                        'full_time' => 'Full Time',
-                                        'part_time' => 'Part Time',
                                     ])
                                     ->required()
                                     ->searchable()
@@ -117,8 +114,6 @@ class CareerResource extends Resource
                         'remote' => 'success',
                         'hybrid' => 'warning',
                         'onsite' => 'info',
-                        'full_time' => 'primary',
-                        'part_time' => 'gray',
                         default => 'secondary',
                     })
                     ->formatStateUsing(fn (string $state): string => ucfirst(str_replace('_', ' ', $state)))
@@ -161,9 +156,6 @@ class CareerResource extends Resource
                         'onsite' => 'Onsite',
                         'remote' => 'Remote',
                         'hybrid' => 'Hybrid',
-                        'contract' => 'Contract',
-                        'full_time' => 'Full Time',
-                        'part_time' => 'Part Time',
                     ]),
 
                 Tables\Filters\SelectFilter::make('job_category')
