@@ -132,7 +132,8 @@ class AppointmentResource extends Resource
                             $records->each->markAsUnread();
                         }),
                 ]),
-            ]);
+            ])
+            ->defaultSort('created_at', 'desc');
     }
 
     public static function getRelations(): array

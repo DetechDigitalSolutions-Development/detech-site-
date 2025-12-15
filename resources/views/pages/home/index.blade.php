@@ -18,6 +18,9 @@
       <!-- Why Choose Us -->
       @include('components.why_choose_us')
 
+      <!-- Brand Logos -->
+      @include('pages.about.brand_logos_section')
+
       <!-- Pricing Plan -->
       @include('components.pricing_plan')
 

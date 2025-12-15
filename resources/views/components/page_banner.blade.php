@@ -4,6 +4,7 @@
           $title_route = $title_route ?? null;
           $banner_image = $banner_image ?? null;
       @endphp
+      @section('title', $title)
       <div class="page-banner overlay">
           <picture class="media media-bg">
               <source media="(max-width: 575px)" srcset="{{ asset($banner_image) }}">

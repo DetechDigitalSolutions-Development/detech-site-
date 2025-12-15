@@ -51,7 +51,7 @@
                                 
 
                             </div>
-                            <div class="project-challenge">
+                            {{-- <div class="project-challenge">
                                 <h2 class="heading text-36" data-aos="fade-up">{{  $project->challenge_title ?? 'The Challenge Of Project'}}</h2>
                                 <ul class="challenge-list list-unstyled">
                                     @foreach ($project->challenge_points as $point)
@@ -66,38 +66,70 @@
                                         </li>
                                     @endforeach
                                 </ul>
-                            </div>
+                            </div> --}}
                         </div>
                         <div class="col-lg-5 col-12">
                             <div class="project-sidebar">
                                 <div class="sidebar-widget project-info radius18" data-aos="fade-up">
-                                    <h2 class="heading text-24">Project Information</h2>
+                                    <h2 class="sidebar-heading heading text-24">Project Information</h2>
                                     <ul class="project-info-list list-unstyled">
+                                        <!-- Client Information -->
+                                        @if($project->client_name)
                                         <li class="project-info-item">
-                                            <div class="info-title heading text-18">Clients:</div>
+                                            <div class="info-title heading text-18">Client:</div>
                                             <div class="info-data text text-16">{{ $project->client_name }}</div>
                                         </li>
+                                        @endif
+
+                                        <!-- Project Type -->
                                         <li class="project-info-item">
-                                            <div class="info-title heading text-18">Start Date:</div>
-                                            <div class="info-data text text-16">{{ $project->start_date }}</div>
+                                            <div class="info-title heading text-18">Project Type:</div>
+                                            <div class="info-data text text-16">{{ $project->formatted_type }}</div>
                                         </li>
+
+                                        <!-- Industry -->
+                                        @if($project->industry)
                                         <li class="project-info-item">
-                                            <div class="info-title heading text-18">End Date:</div>
-                                            <div class="info-data text text-16">{{ $project->end_date }}</div>
+                                            <div class="info-title heading text-18">Industry:</div>
+                                            <div class="info-data text text-16">{{ $project->industry }}</div>
                                         </li>
+                                        @endif
+
+                                        <!-- Region -->
+                                        @if($project->region)
                                         <li class="project-info-item">
-                                            <div class="info-title heading text-18">Owner:</div>
-                                            <div class="info-data text text-16">{{ $project->owner }}</div>
+                                            <div class="info-title heading text-18">Region:</div>
+                                            <div class="info-data text text-16">{{ $project->region }}</div>
                                         </li>
+                                        @endif
+
+                                        <!-- Duration -->
+                                        @if($project->project_duration)
                                         <li class="project-info-item">
-                                            <div class="info-title heading text-18">Categories:</div>
-                                            <div class="info-data text text-16">{{ implode(', ', $project->categories) }}
+                                            <div class="info-title heading text-18">Duration:</div>
+                                            <div class="info-data text text-16">
+                                                <span class="duration-badge">{{ $project->formatted_duration }}</span>
                                             </div>
                                         </li>
+                                        @endif
+
+                                        <!-- Website -->
+                                        @if($project->website)
                                         <li class="project-info-item">
                                             <div class="info-title heading text-18">Website:</div>
-                                            <a href="{{ $project->website }}"
-                                                class="info-data text text-16">{{ str_replace(['http://', 'https://'], '', $project->website) }}</a>
+                                            <a href="{{ $project->website }}" target="_blank" rel="noopener noreferrer"
+                                                class="info-data text text-16">
+                                                {{ str_replace(['http://', 'https://', 'www.'], '', $project->website) }}
+                                            </a>
+                                        </li>
+                                        @endif
+
+                                        <!-- Project Status (Optional) -->
+                                        <li class="project-info-item">
+                                            <div class="info-title heading text-18">Status:</div>
+                                            <div class="info-data text text-16">
+                                                <span class="status-badge status-completed">Completed</span>
+                                            </div>
                                         </li>
                                     </ul>
                                 </div>

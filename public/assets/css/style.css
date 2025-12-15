@@ -4731,6 +4731,7 @@ form.form-blog-search .button {
   margin-block-end: 24px; }
 
 .sidebar-widget {
+  position: sticky;
   --padding: 40px 36px;
   --color-background: rgba(242, 242, 242, 1);
   --color-foreground: rgba(32, 40, 45, 1);
@@ -4765,7 +4766,7 @@ form.form-blog-search .button {
 @media (max-width: 991px) {
   .sidebar-filter {
     --color-background: rgba(255, 255, 255, 1);
-    position: fixed;
+    /* position: fixed; */
     top: 0;
     right: 0;
     background-color: var(--color-background);

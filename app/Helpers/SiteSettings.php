@@ -50,15 +50,31 @@ if (!function_exists('getLastProduct')) {
     }
 }
 
-if (!function_exists('getRandomProduct')) {
-    /**
-     * Get random product with caching
-     */
-    function getRandomProduct()
-    {
-        // Cache for 1 hour to improve performance
-        // return cache()->remember('random_product', 3600, function () {
-            return \App\Models\ProductSite::inRandomOrder()->first();
-        // });
-    }
+// function getRandomProject()
+// {
+//     // Change cache key every 10 seconds
+//     $timeSegment = floor(time() / 10); // Changes every 10 seconds
+//     $cacheKey = 'random_project_' . $timeSegment;
+    
+//     return cache()->remember($cacheKey, 15, function () { // 15 seconds TTL
+//         return \App\Models\Project::query()
+//             ->inRandomOrder()
+//             ->first();
+//     });
+// }
+function getRandomProject()
+{
+    // Cache for 1 hour but with daily variation
+    $cacheKey = 'random_project_' . date('YmdH'); // Changes hourly
+    
+    return cache()->remember($cacheKey, 3600, function () {
+        $projects = \App\Models\Project::all();
+        
+        if ($projects->isEmpty()) {
+            return null;
+        }
+        
+        // Use Laravel's random() method on collection
+        return $projects->random();
+    });
 }

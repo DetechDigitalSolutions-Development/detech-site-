@@ -43,7 +43,7 @@ Route::get('/projects/{project}', [ProjectController::class, 'show'])->name('pro
 
 // Products
 Route::get('/products', [PageController::class, 'products'])->name('products');
-Route::get('/products/{product}', [ProductController::class, 'show'])->name('products.show');
+// Route::get('/products/{product}', [ProductController::class, 'show'])->name('products.show');
 
 // Blog
 Route::get('/blogs', [PageController::class, 'blogs'])->name('blogs');

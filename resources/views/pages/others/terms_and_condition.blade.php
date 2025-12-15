@@ -1,124 +1,177 @@
 @extends('layouts.app')
 
 @section('content')
-    <main>
-      <!-- Page Banner -->
-      @include('components.page_banner',['title'=>'Terms and Conditions','banner_image'=>'assets/img/banner/page-banner.png'])
+<main>
+    <!-- Page Banner -->
+    @include('components.page_banner',['title'=>'Terms and Conditions','banner_image'=>'assets/img/banner/page-banner.png'])
 
-         <!-- Blog List -->
-      <div class="page-blog mt-100">
+    <!-- Blog List -->
+    <div class="page-blog mt-100">
         <div class="container container-narrow">
-          <div class="blog-details">
-            <div class="card-blog-list" data-aos="fade-up">
-              <div class="card-blog-content">
-                <h2 class="card-blog-heading heading text-50 text-center">
-                  Our Terms & Conditions
-                </h2>
+            <div class="blog-details">
+                <div class="card-blog-list" data-aos="fade-up">
+                    <div class="card-blog-content">
+                        <h2 class="card-blog-heading heading text-50 text-center">
+                            Terms and Conditions – Detech
+                        </h2>
 
-                <div class="blog-description">
-                  <p>
-                    This website is operated by Consulo. Throughout the site,
-                    the terms “we”, “us” and “our” refer to Consulo. Consulo
-                    offers this website, including all information, tools and
-                    services available from this site to you, the user,
-                    conditioned upon your acceptance of all terms, conditions,
-                    policies and notices stated here.
-                  </p>
+                        <div class="blog-description">
+                            <p class="lead">
+                                Welcome to Detech! These Terms and Conditions outline the rules and regulations for the use of Detech's website, accessible at https://www.detech.live.
+                            </p>
+                            
+                            <p>
+                                By accessing or using this website, you agree to be bound by these Terms and Conditions. If you do not agree with any part of these terms, you must not continue to use the Detech website.
+                            </p>
 
-                  <p>
-                    Please read these Terms of Service carefully before
-                    accessing or using our website. By accessing or using any
-                    part of the site, you agree to be bound by these Terms of
-                    Service. If you do not agree to all the terms and conditions
-                    of this agreement, then you may not access the website or
-                    use any services. If these Terms of Service are considered
-                    an offer, acceptance is expressly limited to these Terms of
-                    Service.
-                  </p>
+                            <h3>1. Definitions</h3>
+                            <p>
+                                For the purposes of these Terms and Conditions, the following terminology applies:
+                            </p>
+                            <ul>
+                                <li><strong>"Client", "You", "Your"</strong> refers to the user accessing this website and accepting the Company's terms.</li>
+                                <li><strong>"The Company", "We", "Our", "Us"</strong> refers to Detech.</li>
+                                <li><strong>"Party", "Parties"</strong> refers to both the Client and the Company.</li>
+                            </ul>
+                            <p>All terminology applies interchangeably in singular or plural form and regardless of capitalization or gender.</p>
 
-                  <h3>What is Lorem Ipsum?</h3>
-                  <p>
-                    Lorem Ipsum is simply dummy text of the printing and
-                    typesetting industry. Lorem Ipsum has been the industry's
-                    standard dummy text ever since the 1500s, when an unknown
-                    printer took a galley of type and scrambled it to make a
-                    type specimen book. It has survived not only five centuries,
-                    but also the leap into electronic typesetting, remaining
-                    essentially unchanged. It was popularised in the 1960s with
-                    the release of Letraset sheets containing Lorem Ipsum
-                    passages, and more recently with desktop publishing software
-                    like Aldus PageMaker including versions of Lorem Ipsum.
-                  </p>
+                            <h3>2. Cookies</h3>
+                            <p>
+                                We use cookies to enhance your experience on our website. By accessing Detech, you agree to the use of cookies in accordance with our <a href="{{ route('privacy') }}">Privacy Policy</a>.
+                            </p>
+                            <p>Cookies help us:</p>
+                            <ul>
+                                <li>Enable essential website functionality</li>
+                                <li>Understand user behavior and improve performance</li>
+                            </ul>
+                            <p>Some affiliate or analytics partners may also use cookies.</p>
 
-                  <h3>Why do we use it?</h3>
-                  <p>
-                    It is a long established fact that a reader will be
-                    distracted by the readable content of a page when looking at
-                    its layout. The point of using Lorem Ipsum is that it has a
-                    more-or-less normal distribution of letters, as opposed to
-                    using 'Content here, content here', making it look like
-                    readable English. Many desktop publishing packages and web
-                    page editors now use Lorem Ipsum as their default model
-                    text, and a search for 'lorem ipsum' will uncover many web
-                    sites still in their infancy. Various versions have evolved
-                    over the years, sometimes by accident, sometimes on purpose
-                    (injected humour and the like).
-                  </p>
+                            <h3>3. Intellectual Property Rights</h3>
+                            <p>
+                                Unless otherwise stated, Detech and/or its licensors own all intellectual property rights for the content published on this website. All rights are reserved.
+                            </p>
+                            <p>You may access the website for personal, non-commercial use only, subject to the following restrictions. You must not:</p>
+                            <ul>
+                                <li>Republish material from Detech</li>
+                                <li>Sell, rent, or sub-license material from Detech</li>
+                                <li>Reproduce, duplicate, or copy material from Detech</li>
+                                <li>Redistribute content from Detech without prior written consent</li>
+                            </ul>
 
-                  <h3>Where does it come from?</h3>
-                  <p>
-                    Contrary to popular belief, Lorem Ipsum is not simply random
-                    text. It has roots in a piece of classical Latin literature
-                    from 45 BC, making it over 2000 years old. Richard
-                    McClintock, a Latin professor at Hampden-Sydney College in
-                    Virginia, looked up one of the more obscure Latin words,
-                    consectetur, from a Lorem Ipsum passage, and going through
-                    the cites of the word in classical literature, discovered
-                    the undoubtable source. Lorem Ipsum comes from sections
-                    1.10.32 and 1.10.33 of "de Finibus Bonorum et Malorum" (The
-                    Extremes of Good and Evil) by Cicero, written in 45 BC. This
-                    book is a treatise on the theory of ethics, very popular
-                    during the Renaissance. The first line of Lorem Ipsum,
-                    "Lorem ipsum dolor sit amet..", comes from a line in section
-                    1.10.32.
-                  </p>
-                  <p>
-                    The standard chunk of Lorem Ipsum used since the 1500s is
-                    reproduced below for those interested. Sections 1.10.32 and
-                    1.10.33 from "de Finibus Bonorum et Malorum" by Cicero are
-                    also reproduced in their exact original form, accompanied by
-                    English versions from the 1914 translation by H. Rackham.
-                  </p>
+                            <h3>4. User Comments and Content</h3>
+                            <p>
+                                Certain parts of this website may allow users to post comments or content. Detech does not pre-screen or review comments before they appear on the website.
+                            </p>
+                            <p>
+                                Comments represent the views of the individual who posts them and do not reflect the views of Detech, its employees, or affiliates.
+                            </p>
+                            <p>
+                                To the extent permitted by law, Detech shall not be liable for any comments or damages resulting from their use or publication.
+                            </p>
+                            <p>
+                                Detech reserves the right to monitor and remove comments that are inappropriate, offensive, or in breach of these Terms.
+                            </p>
+                            <p>You warrant that:</p>
+                            <ul>
+                                <li>You have the right and necessary permissions to post the content</li>
+                                <li>Your content does not infringe intellectual property rights</li>
+                                <li>Your content is not defamatory, offensive, unlawful, or invasive of privacy</li>
+                                <li>Your content will not be used for solicitation or unlawful activities</li>
+                            </ul>
+                            <p>
+                                By posting content, you grant Detech a non-exclusive license to use, reproduce, edit, and distribute such content in any media.
+                            </p>
 
-                  <p>
-                    Use both direct conversations and indirect observations to
-                    get visibility into employees challenges and concerns. Use
-                    every opportunity to make clear to employees that you
-                    support and care them. To facilitate regular conversations
-                    between managers and employees, provide.
-                  </p>
+                            <h3>5. Hyperlinking to Our Website</h3>
+                            <p>
+                                The following organizations may link to our website without prior written approval:
+                            </p>
+                            <ul>
+                                <li>Government agencies</li>
+                                <li>Search engines</li>
+                                <li>News organizations</li>
+                                <li>Online directory distributors</li>
+                                <li>System-wide accredited businesses (excluding non-profit fundraising organizations)</li>
+                            </ul>
+                            <p>Links must:</p>
+                            <ul>
+                                <li>Not be misleading or deceptive</li>
+                                <li>Not falsely imply sponsorship or endorsement</li>
+                                <li>Fit naturally within the context of the linking website</li>
+                            </ul>
+                            <p>We may approve additional link requests from:</p>
+                            <ul>
+                                <li>Business and consumer information sources</li>
+                                <li>Community websites</li>
+                                <li>Educational institutions and trade associations</li>
+                                <li>Professional service firms (legal, accounting, consulting)</li>
+                            </ul>
+                            <p>
+                                To request approval, contact us via email with your organization details and intended URLs. Please allow up to 2–3 weeks for a response.
+                            </p>
+                            <p>Approved organizations may link using:</p>
+                            <ul>
+                                <li>Our company name</li>
+                                <li>The website URL</li>
+                                <li>A relevant description consistent with the linking site's content</li>
+                            </ul>
+                            <p>Use of Detech's logo or branding requires a prior trademark license agreement.</p>
 
-                  <p>
-                    The third Monday of January is supposed to be the most
-                    depressing day of the year. Whether you believe that or not,
-                    the long nights, cold weather, and trying to keep to new
-                    year resolutions are all probably getting to you a little by
-                    now. To make matters worse many will still be recovering
-                    from their Christmas spending. So how can you make today
-                  </p>
+                            <h3>6. iFrames</h3>
+                            <p>
+                                You may not create frames around our web pages that alter the visual appearance or presentation of our website without prior written permission.
+                            </p>
 
-                  <p>
-                    Vast numbers of employees now work remotely, and it's too
-                    late to develop a set of remote-work policies if you didn't
-                    already have one. But there are ways to make the remote-work
-                    experience productive and engaging for employees
-                  </p>
+                            <h3>7. Content Liability</h3>
+                            <p>
+                                We are not responsible for content that appears on third-party websites linking to us. You agree to indemnify and defend Detech against all claims arising from your website.
+                            </p>
+                            <p>No links should appear on websites containing unlawful, offensive, or rights-infringing material.</p>
+
+                            <h3>8. Privacy</h3>
+                            <p>
+                                Your use of this website is also governed by our <a href="{{ route('privacy') }}">Privacy Policy</a>. Please review it to understand how we collect and process personal data.
+                            </p>
+
+                            <h3>9. Reservation of Rights</h3>
+                            <p>
+                                We reserve the right to request the removal of any links to our website. You agree to remove such links immediately upon request.
+                            </p>
+                            <p>
+                                We may amend these Terms and Conditions at any time. Continued use of the website signifies acceptance of the updated terms.
+                            </p>
+
+                            <h3>10. Disclaimer</h3>
+                            <p>
+                                To the maximum extent permitted by applicable law, Detech excludes all representations, warranties, and conditions relating to the website and its use.
+                            </p>
+                            <p>Nothing in this disclaimer shall:</p>
+                            <ul>
+                                <li>Limit or exclude liability for death or personal injury</li>
+                                <li>Limit or exclude liability for fraud or fraudulent misrepresentation</li>
+                                <li>Exclude liabilities that cannot be excluded under applicable law</li>
+                            </ul>
+                            <p>
+                                As long as the website and its services are provided free of charge, Detech shall not be liable for any loss or damage of any nature.
+                            </p>
+
+                            <h3>11. Governing Law</h3>
+                            <p>
+                                These Terms and Conditions are governed by and construed in accordance with the applicable laws of Sri Lanka, and any disputes shall be subject to the jurisdiction of Sri Lankan courts.
+                            </p>
+
+                            <h3>Contact Us</h3>
+                            <p>If you have any questions about these Terms and Conditions, please contact us:</p>
+                            <ul>
+                                <li><strong>Detech</strong></li>
+                                <li><strong>Email:</strong> <a href="mailto:hello@detech.live">hello@detech.live</a></li>
+                                <li><strong>Phone:</strong> +94 71 571 8361</li>
+                            </ul>
+                        </div>
+                    </div>
                 </div>
-              </div>
             </div>
-          </div>
         </div>
-      </div>
-    </main>
-    
+    </div>
+</main>
 @endsection

@@ -3,7 +3,7 @@
     @else
 <div class="col-12 col-sm-6 col-lg-4 col-xl-3" data-aos="fade-up" data-aos-delay="400">
 @endif
-    <a class="card-project radius18" aria-label="project details" href="{{ route('projects.show', $project->id) }}">
+    <a class="card-project radius18" aria-label="project details" href="{{ route('projects.show', $project->slug) }}">
         <img src="{{ Storage::disk(config('public'))->url($project->featured_img) ?? asset('assets/img/blog/1.jpg') }}"
             alt="project image" width="645" height="690" loading="lazy">
         <div class="card-project-content-absolute">

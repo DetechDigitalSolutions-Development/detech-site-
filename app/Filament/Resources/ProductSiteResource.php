@@ -256,7 +256,8 @@ class ProductSiteResource extends Resource
                             }
                         }),
                 ]),
-            ]);
+            ])
+            ->defaultSort('created_at', 'desc');
     }
 
     public static function getPages(): array

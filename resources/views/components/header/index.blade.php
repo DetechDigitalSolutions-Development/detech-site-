@@ -83,7 +83,7 @@
                                                     <a class="menu-link" href="{{ route('products') }}">
                                                         <div class="heading text-20">Our Products</div>
                                                         <div class="text text-14">Accelerate your product journey from
-                                                            concept to launch—with our expert development support.</div>
+                                                            concept to launch with our expert development support.</div>
                                                     </a>
                                                 </li>
                                             </ul>
@@ -91,31 +91,31 @@
 
                                         <li class="nav-item">
                                             @php
-                                                $product = getRandomProduct();
+                                                $project = getRandomProject();
                                                 // Safely get the site slug with fallback
-                                                $siteSlug = $product->site_slug ?? null;
-                                                $productUrl = $siteSlug ? route('product.site', $siteSlug) : '#';
+                                                // $siteSlug = $project->site_slug ?? null;
+                                                // $productUrl = $siteSlug ? route('product.site', $siteSlug) : '#';
                                             @endphp
-                                            <a class="menu-link heading fw-300" href="{{ $productUrl }}">
-                                                FEATURED PRODUCT
+                                            <a class="menu-link heading fw-300" href="{{ route('projects.show', $project->id) }}">
+                                                FEATURED PROJECT
                                             </a>
 
                                             <ul class="reset-submenu list-unstyled submenu-color">
                                                 <li class="nav-item">
                                                     <a class="menu-link megamenu-image-wrap"
-                                                        href="{{ $productUrl }}">
+                                                        href="{{ route('projects.show', $project->id) }}">
                                                         <picture>
                                                             <source media="(max-width: 575px)"
                                                                 srcset="{{ asset('assets/img/menu/575.jpg') }}">
-                                                            <img src="{{ Storage::disk(config('public'))->url($product->featured_img ?? null )}}"
+                                                            <img src="{{ Storage::disk(config('public'))->url($project->featured_img ?? null )}}"
                                                                 width="1000" height="668" loading="lazy"
                                                                 alt="Hero Image">
                                                         </picture>
                                                         <div class="content">
-                                                            <div class="heading text-20">{{ $product->product_title ?? null }}
+                                                            <div class="heading text-20">{{ $project->title ?? null }}
                                                             </div>
                                                             <div class="text text-14">
-                                                                {{ $product->short_description ?? null }}</div>
+                                                                {{ $project->short_description ?? null }}</div>
                                                             <div class="button button--primary">
                                                                 <span class="svg-wrapper">
                                                                     <svg class="icon-20" width="20" height="20"

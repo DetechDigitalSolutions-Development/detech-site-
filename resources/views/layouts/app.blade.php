@@ -2,7 +2,12 @@
 <html lang="en" class="no-js">
 
 <head>
-    <title>Detech | </title>
+    <title> @hasSection('title')
+                @yield('title') | Detech
+            @else
+                Detech - Digital Excellence
+            @endif
+    </title>
     <link rel="shortcut icon" href="{{ asset('assets/img/favicon.png') }}" type="image/x-icon">
 
     <!-- meta tags -->

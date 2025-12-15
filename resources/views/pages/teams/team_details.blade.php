@@ -55,6 +55,7 @@
                                 {{ $team->e_mail }}
                             </div>
                             <ul class="social-icons list-unstyled">
+                                @if ($team->fb_url)
                                 <li data-aos="fade-up" data-aos-delay="100">
                                     <a class="social-link text" href="{{ $team->fb_url }}">
                                         <svg width="10" height="18" viewBox="0 0 10 18" fill="none"
@@ -66,6 +67,8 @@
                                         <span class="visually-hidden">Facebook</span>
                                     </a>
                                 </li>
+                                @endif
+                                @if ($team->linkedin_url)
                                 <li data-aos="fade-up" data-aos-delay="200">
                                     <a class="social-link text" href="{{ $team->linkedin_url }}">
                                         <svg width="17" height="16" viewBox="0 0 17 16" fill="none"
@@ -77,6 +80,8 @@
                                         <span class="visually-hidden">Linkedin</span>
                                     </a>
                                 </li>
+                                @endif
+                                @if ($team->x_url)
                                 <li data-aos="fade-up" data-aos-delay="300">
                                     <a class="social-link text" href="{{ $team->x_url }}">
                                         <svg width="18" height="14" viewBox="0 0 18 14" fill="none"
@@ -88,6 +93,8 @@
                                         <span class="visually-hidden">Twitter</span>
                                     </a>
                                 </li>
+                                @endif
+                                @if ($team->insta_url)
                                 <li data-aos="fade-up" data-aos-delay="400">
                                     <a class="social-link text" href="{{ $team->insta_url }}">
                                         <svg width="18" height="18" viewBox="0 0 18 18" fill="none"
@@ -99,6 +106,7 @@
                                         <span class="visually-hidden">Instagram</span>
                                     </a>
                                 </li>
+                                @endif
                             </ul>
                         </div>
                     </div>
