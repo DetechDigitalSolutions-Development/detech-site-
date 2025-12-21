@@ -24,7 +24,7 @@
                                 By accessing or using this website, you agree to be bound by these Terms and Conditions. If you do not agree with any part of these terms, you must not continue to use the Detech website.
                             </p>
 
-                            <h3>1. Definitions</h3>
+                            <h4>1. Definitions</h4>
                             <p>
                                 For the purposes of these Terms and Conditions, the following terminology applies:
                             </p>
@@ -35,7 +35,7 @@
                             </ul>
                             <p>All terminology applies interchangeably in singular or plural form and regardless of capitalization or gender.</p>
 
-                            <h3>2. Cookies</h3>
+                            <h4>2. Cookies</h4>
                             <p>
                                 We use cookies to enhance your experience on our website. By accessing Detech, you agree to the use of cookies in accordance with our <a href="{{ route('privacy') }}">Privacy Policy</a>.
                             </p>
@@ -46,7 +46,7 @@
                             </ul>
                             <p>Some affiliate or analytics partners may also use cookies.</p>
 
-                            <h3>3. Intellectual Property Rights</h3>
+                            <h4>3. Intellectual Property Rights</h4>
                             <p>
                                 Unless otherwise stated, Detech and/or its licensors own all intellectual property rights for the content published on this website. All rights are reserved.
                             </p>
@@ -58,7 +58,7 @@
                                 <li>Redistribute content from Detech without prior written consent</li>
                             </ul>
 
-                            <h3>4. User Comments and Content</h3>
+                            <h4>4. User Comments and Content</h4>
                             <p>
                                 Certain parts of this website may allow users to post comments or content. Detech does not pre-screen or review comments before they appear on the website.
                             </p>
@@ -82,7 +82,7 @@
                                 By posting content, you grant Detech a non-exclusive license to use, reproduce, edit, and distribute such content in any media.
                             </p>
 
-                            <h3>5. Hyperlinking to Our Website</h3>
+                            <h4>5. Hyperlinking to Our Website</h4>
                             <p>
                                 The following organizations may link to our website without prior written approval:
                             </p>
@@ -117,23 +117,23 @@
                             </ul>
                             <p>Use of Detech's logo or branding requires a prior trademark license agreement.</p>
 
-                            <h3>6. iFrames</h3>
+                            <h4>6. iFrames</h4>
                             <p>
                                 You may not create frames around our web pages that alter the visual appearance or presentation of our website without prior written permission.
                             </p>
 
-                            <h3>7. Content Liability</h3>
+                            <h4>7. Content Liability</h4>
                             <p>
                                 We are not responsible for content that appears on third-party websites linking to us. You agree to indemnify and defend Detech against all claims arising from your website.
                             </p>
                             <p>No links should appear on websites containing unlawful, offensive, or rights-infringing material.</p>
 
-                            <h3>8. Privacy</h3>
+                            <h4>8. Privacy</h4>
                             <p>
                                 Your use of this website is also governed by our <a href="{{ route('privacy') }}">Privacy Policy</a>. Please review it to understand how we collect and process personal data.
                             </p>
 
-                            <h3>9. Reservation of Rights</h3>
+                            <h4>9. Reservation of Rights</h4>
                             <p>
                                 We reserve the right to request the removal of any links to our website. You agree to remove such links immediately upon request.
                             </p>
@@ -141,7 +141,7 @@
                                 We may amend these Terms and Conditions at any time. Continued use of the website signifies acceptance of the updated terms.
                             </p>
 
-                            <h3>10. Disclaimer</h3>
+                            <h4>10. Disclaimer</h4>
                             <p>
                                 To the maximum extent permitted by applicable law, Detech excludes all representations, warranties, and conditions relating to the website and its use.
                             </p>
@@ -155,12 +155,12 @@
                                 As long as the website and its services are provided free of charge, Detech shall not be liable for any loss or damage of any nature.
                             </p>
 
-                            <h3>11. Governing Law</h3>
+                            <h4>11. Governing Law</h4>
                             <p>
                                 These Terms and Conditions are governed by and construed in accordance with the applicable laws of Sri Lanka, and any disputes shall be subject to the jurisdiction of Sri Lankan courts.
                             </p>
 
-                            <h3>Contact Us</h3>
+                            <h4>Contact Us</h4>
                             <p>If you have any questions about these Terms and Conditions, please contact us:</p>
                             <ul>
                                 <li><strong>Detech</strong></li>

@@ -1,3 +1,19 @@
+{{-- <div class="drawer-block"> --}}
+    <div class="drawer-heading text text-18">
+    {{-- <ul class="drawer-additional-menu list-unstyled flex-direction-column"> --}}
+        <a href="https://cal.com/detech-company" class="button button--primary ">
+                                Get in Touch
+                                <span class="svg-wrapper">
+                                    <svg class="icon-20" width="20" height="20" viewBox="0 0 20 20"
+                                        fill="none">
+                                        <path
+                                            d="M13.3365 7.84518L6.16435 15.0173L4.98584 13.8388L12.158 6.66667H5.83652V5H15.0032V14.1667H13.3365V7.84518Z"
+                                            fill="currentColor" />
+                                    </svg>
+                                </span>
+                            </a>
+    {{-- </ul> --}}
+</div>
 <div class="drawer-block">
     <div class="drawer-heading text text-18">Our Services</div>
     <ul class="drawer-additional-menu list-unstyled flex-direction-column">

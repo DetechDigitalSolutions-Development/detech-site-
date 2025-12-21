@@ -89,7 +89,7 @@
                                             </ul>
                                         </li>
 
-                                        <li class="nav-item">
+                                        <li class="nav-item d-none d-lg-block">
                                             @php
                                                 $project = getRandomProject();
                                                 // Safely get the site slug with fallback

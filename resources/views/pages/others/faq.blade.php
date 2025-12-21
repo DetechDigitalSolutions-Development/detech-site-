@@ -52,22 +52,27 @@
                                 representative.
                             </div>
                             <div class="faq-form-wrap radius18" data-aos="fade-up">
-                                <form action="#" class="faq-form">
-                                    <h2 class="heading text-24" data-aos="fade-up">Have any Question</h2>
+                                <form action="{{ route('appointments.store') }}" method="POST" class="faq-form">
+                                    @csrf
+                                    <h2 class="heading text-24 text-white" data-aos="fade-up">Have any Question</h2>
                                     <div class="field" data-aos="fade-up">
                                         <label for="FaqForm-name" class="visually-hidden">
                                             Your Name
                                         </label>
                                         <input id="FaqForm-name" class="text text-16" type="text" placeholder="Your Name"
-                                            name="Full name" required>
+                                            name="name" required>
                                     </div>
+
+                                    <input id="ContactForm-email" class="" type="hidden" name="email" required value="anonymous@detech.com">
+                                    <input id="ContactForm-services" class="" type="hidden" name="service" required value="FAQ">
+
                                     <div class="field" data-aos="fade-up" data-aos-delay="50">
                                         <label for="FaqForm-body" class="visually-hidden">
                                             Write your message
                                         </label>
-                                        <textarea id="FaqForm-body" class="text text-16" rows="4" placeholder="Write Message.." name="Message" required></textarea>
+                                        <textarea id="FaqForm-body" class="text text-16" rows="4" placeholder="Write Message.." name="message" required></textarea>
                                     </div>
-                                    <a href="#" data-aos="fade-up" data-aos-delay="50" class="button button--secondary"
+                                    <button type="submit" data-aos="fade-up" data-aos-delay="50" class="button button--secondary"
                                         aria-label="Ask Your Question">
                                         Ask Question Now
                                         <span class="svg-wrapper">

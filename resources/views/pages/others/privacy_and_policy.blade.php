@@ -16,8 +16,10 @@
                         </h2>
                         
                         <div class="text-center text-gray-600 mb-8">
-                            <p><strong>Effective Date:</strong> 01/10/2025</p>
-                            <p><strong>Last Updated:</strong> 14/12/2025</p>
+                            <p>
+                                <strong>Effective Date:</strong> 01/10/2025 -- 
+                                <strong>Last Updated:</strong> 14/12/2025
+                            </p>
                         </div>
 
                         <div class="blog-description">
@@ -29,13 +31,13 @@
                                 By accessing our website or using our services, you acknowledge that you have read and understood this Privacy Policy.
                             </p>
 
-                            <h3>1. Definitions</h3>
+                            <h4>1. Definitions</h4>
                             <ul>
                                 <li><strong>"We", "Us", "Our"</strong> refer to Detech.</li>
                                 <li><strong>"You", "Your"</strong> refer to any individual whose personal data we process.</li>
                             </ul>
 
-                            <h3>2. Data Controller Information</h3>
+                            <h4>2. Data Controller Information</h4>
                             <p>
                                 The data controller responsible for processing your personal data is:
                             </p>
@@ -48,7 +50,7 @@
                                 If you have any questions about this Privacy Policy or our data processing practices, please contact us using the details above.
                             </p>
 
-                            <h3>3. Types of Personal Data We Collect</h3>
+                            <h4>3. Types of Personal Data We Collect</h4>
                             <p>
                                 We may collect and process the following categories of personal data:
                             </p>
@@ -63,7 +65,7 @@
                                 Personal data is collected only when you voluntarily submit it through our website or related communication channels.
                             </p>
 
-                            <h3>4. Lawful Basis for Processing</h3>
+                            <h4>4. Lawful Basis for Processing</h4>
                             <p>
                                 We process personal data under one or more of the following lawful bases defined by the GDPR:
                             </p>
@@ -74,7 +76,7 @@
                                 <li><strong>Consent:</strong> For marketing communications or other optional data processing activities.</li>
                             </ul>
 
-                            <h3>5. Purposes of Processing</h3>
+                            <h4>5. Purposes of Processing</h4>
                             <p>
                                 Your personal data may be used for the following purposes:
                             </p>
@@ -86,7 +88,7 @@
                                 <li><strong>Marketing (with consent):</strong> To send newsletters, announcements, or promotional communications.</li>
                             </ul>
 
-                            <h3>6. Data Retention</h3>
+                            <h4>6. Data Retention</h4>
                             <p>
                                 We retain personal data only for as long as necessary to fulfill the purposes outlined in this Policy or to meet legal obligations:
                             </p>
@@ -100,7 +102,7 @@
                                 After the applicable retention period, personal data will be securely deleted or anonymized.
                             </p>
 
-                            <h3>7. Sharing of Personal Data</h3>
+                            <h4>7. Sharing of Personal Data</h4>
                             <p>
                                 We may share your personal data only in the following circumstances:
                             </p>
@@ -111,7 +113,7 @@
                             </ul>
                             <p><strong>We do not sell or rent your personal data to third parties.</strong></p>
 
-                            <h3>8. Your Rights Under GDPR</h3>
+                            <h4>8. Your Rights Under GDPR</h4>
                             <p>
                                 Where applicable, you have the following rights under the GDPR:
                             </p>
@@ -128,7 +130,7 @@
                                 To exercise these rights, please contact <a href="mailto:hello@detech.live">hello@detech.live</a>
                             </p>
 
-                            <h3>9. Data Security</h3>
+                            <h4>9. Data Security</h4>
                             <p>
                                 We implement appropriate technical and organizational measures to protect personal data, including:
                             </p>
@@ -141,7 +143,7 @@
                                 Despite these measures, no internet-based system can be guaranteed to be completely secure. Please take care when sharing personal information online.
                             </p>
 
-                            <h3>10. Cookies and Tracking Technologies</h3>
+                            <h4>10. Cookies and Tracking Technologies</h4>
                             <p>
                                 We use cookies to improve website functionality and performance:
                             </p>
@@ -153,7 +155,7 @@
                                 You can manage or disable cookies through your browser settings.
                             </p>
 
-                            <h3>11. Data Breach Notification</h3>
+                            <h4>11. Data Breach Notification</h4>
                             <p>
                                 In the event of a personal data breach that poses a risk to your rights and freedoms, we will:
                             </p>
@@ -163,22 +165,22 @@
                                 <li>Notify the appropriate supervisory authority within 72 hours, where required.</li>
                             </ul>
 
-                            <h3>12. Third-Party Links</h3>
+                            <h4>12. Third-Party Links</h4>
                             <p>
                                 Our website may include links to third-party websites. We are not responsible for their content or privacy practices. Please review their privacy policies before providing personal data.
                             </p>
 
-                            <h3>13. Changes to This Policy</h3>
+                            <h4>13. Changes to This Policy</h4>
                             <p>
                                 We may update this Privacy Policy from time to time. Any changes will be published on this page with a revised "Last Updated" date. We encourage regular review of this Policy.
                             </p>
 
-                            <h3>14. Governing Law</h3>
+                            <h4>14. Governing Law</h4>
                             <p>
                                 This Privacy Policy is governed by the GDPR and applicable data protection laws of Sri Lanka. Where GDPR applies, it covers the processing of personal data of individuals located in the European Union (EU) or European Economic Area (EEA).
                             </p>
 
-                            <h3>Contact Information</h3>
+                            <h4>Contact Information</h4>
                             <p>
                                 For questions or concerns regarding this Privacy Policy or personal data processing:
                             </p>

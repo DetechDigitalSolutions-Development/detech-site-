@@ -20,7 +20,7 @@
                                 At Detech, we follow a clear and systematic working process to deliver reliable, scalable, and high-quality digital solutions. Our approach ensures transparency, efficiency, and consistent results at every stage of the project lifecycle.
                             </p>
 
-                            <h3>Step 1: Requirement Gathering & Discovery</h3>
+                            <h4>Step 1: Requirement Gathering & Discovery</h4>
                             <p>
                                 We start by understanding your business objectives, target users, and technical requirements. Through discussions and analysis, we identify challenges, define goals, and document clear project requirements to avoid ambiguity later in the process.
                             </p>
@@ -30,7 +30,7 @@
                                 <li>Defined project scope and expectations</li>
                             </ul>
 
-                            <h3>Step 2: Planning & Strategy</h3>
+                            <h4>Step 2: Planning & Strategy</h4>
                             <p>
                                 Once requirements are finalized, we create a detailed project roadmap. This includes timelines, milestones, resource allocation, and technical architecture. Our planning phase ensures smooth execution and timely delivery.
                             </p>
@@ -40,7 +40,7 @@
                                 <li>Technical and functional strategy</li>
                             </ul>
 
-                            <h3>Step 3: UI/UX Design</h3>
+                            <h4>Step 3: UI/UX Design</h4>
                             <p>
                                 Our design team creates intuitive, user-friendly, and visually appealing interfaces. We focus on usability, accessibility, and consistency to ensure a seamless user experience across all devices.
                             </p>
@@ -50,7 +50,7 @@
                                 <li>Responsive and user-centric designs</li>
                             </ul>
 
-                            <h3>Step 4: Development & Implementation</h3>
+                            <h4>Step 4: Development & Implementation</h4>
                             <p>
                                 Our developers bring the designs to life using modern technologies and best coding practices. We ensure scalability, performance, and security throughout the development process.
                             </p>
@@ -60,7 +60,7 @@
                                 <li>Clean, maintainable codebase</li>
                             </ul>
 
-                            <h3>Step 5: Testing & Quality Assurance</h3>
+                            <h4>Step 5: Testing & Quality Assurance</h4>
                             <p>
                                 Quality is a priority at Detech. Our QA team conducts comprehensive testing, including functional, usability, performance, and security testing, to ensure the solution meets all requirements.
                             </p>
@@ -70,7 +70,7 @@
                                 <li>Verified functionality and performance</li>
                             </ul>
 
-                            <h3>Step 6: Deployment & Launch</h3>
+                            <h4>Step 6: Deployment & Launch</h4>
                             <p>
                                 After successful testing, we deploy the solution to the production environment. We ensure a smooth launch with proper configuration, monitoring, and documentation.
                             </p>
@@ -80,7 +80,7 @@
                                 <li>Smooth and secure deployment</li>
                             </ul>
 
-                            <h3>Step 7: Support & Maintenance</h3>
+                            <h4>Step 7: Support & Maintenance</h4>
                             <p>
                                 Our work doesn't end at launch. We provide ongoing support, maintenance, and enhancements to ensure long-term success and adaptability to future business needs.
                             </p>
@@ -90,7 +90,7 @@
                                 <li>Reliable post-launch support</li>
                             </ul>
 
-                            <h3>Why Our Process Works</h3>
+                            <h4>Why Our Process Works</h4>
                             <ul>
                                 <li>Transparent and structured workflow</li>
                                 <li>Client involvement at every key stage</li>
@@ -99,7 +99,7 @@
                             </ul>
 
                             <div class="cta-section mt-60 text-center" data-aos="fade-up">
-                                <h3 class="heading text-32 mb-30">Ready to Start Your Project?</h3>
+                                <h4 class="heading text-32 mb-30">Ready to Start Your Project?</h4>
                                 <p class="text text-18 mb-40">
                                     Let's turn your ideas into impactful digital solutions.<br>
                                     Contact Detech today and let's build something great together.

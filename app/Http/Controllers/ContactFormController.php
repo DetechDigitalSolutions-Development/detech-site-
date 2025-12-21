@@ -67,25 +67,27 @@ class ContactFormController extends Controller
                 'total' => $totalCount,
             ]);
 
-            // 4. Get admin email from config or .env
-            $adminEmail = config('mail.from.address', 'admin@detech.com');
-            Log::info('Admin Email', ['email' => $adminEmail]);
+            if($request->service !== 'FAQ'){
+                // 4. Get admin email from config or .env
+                $adminEmail = config('mail.from.address', 'admin@detech.com');
+                Log::info('Admin Email', ['email' => $adminEmail]);
 
-            // 5. Send notification to admin (pass total count as parameter)
-            // In ContactFormController.php - line 68
-            Mail::to($adminEmail)
-                ->send(new NewAppointmentNotification($appointment, $unreadCount, $todaysCount, $totalCount, $selectedResources));
+                // 5. Send notification to admin (pass total count as parameter)
+                // In ContactFormController.php - line 68
+                Mail::to($adminEmail)
+                    ->send(new NewAppointmentNotification($appointment, $unreadCount, $todaysCount, $totalCount, $selectedResources));
 
-            Log::info('Admin notification sent successfully');
+                Log::info('Admin notification sent successfully');
 
-            // 6. Send auto-reply confirmation to user
-            Mail::to($appointment->email)
-                ->send(new AppointmentConfirmation($appointment));
+                // 6. Send auto-reply confirmation to user
+                Mail::to($appointment->email)
+                    ->send(new AppointmentConfirmation($appointment));
 
-            Log::info('User confirmation sent successfully');
+                Log::info('User confirmation sent successfully');
 
-            // 7. Set success flash message
-            Session::flash('success', 'Your appointment request has been submitted successfully! We have sent a confirmation email');
+                // 7. Set success flash message
+                Session::flash('success', 'Your appointment request has been submitted successfully! We have sent a confirmation email');
+            }
 
             // 8. Redirect back
             return back();
