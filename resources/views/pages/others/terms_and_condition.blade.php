@@ -16,7 +16,7 @@
                         </h2>
 
                         <div class="blog-description">
-                            <p class="lead">
+                            <p>
                                 Welcome to Detech! These Terms and Conditions outline the rules and regulations for the use of Detech's website, accessible at https://www.detech.live.
                             </p>
                             

@@ -8,6 +8,7 @@ use App\Models\ProductSite;
 use App\Models\Testimonial;
 use App\Models\Team;
 use Illuminate\View\View;
+use Illuminate\Http\Request;
 use App\Http\Controllers\ServiceController;
 
 class PageController extends Controller
@@ -18,7 +19,7 @@ class PageController extends Controller
     public function home(): View
     {
         // Fetch the last 4 projects
-        $recentProjects = Project::latest()->take(4)->get();
+        $recentProjects = Project::latest()->take(6)->get();
 
         // Fetch the last 4 testimonials
         $testimonials = Testimonial::get();
@@ -106,10 +107,68 @@ class PageController extends Controller
     /**
      * Display the contact page.
      */
-    public function contact(): View
-    {
-        return view('pages.contact.index');
+    /**
+ * Display the contact page.
+ */
+public function contact(Request $request): View
+{
+    $selectedResources = [];
+    $resourceSummary = '';
+    
+    // Parse selected items from query parameters
+    if ($request->has('items')) {
+        $selectedItems = $request->query('items', []);
+        
+        foreach ($selectedItems as $item) {
+            $parts = explode('|', $item, 2);
+            if (count($parts) === 2) {
+                $selectedResources[] = [
+                    'role' => $parts[0],
+                    'experience' => $parts[1]
+                ];
+            }
+        }
+        
+        // Generate resource summary
+        $resourceSummary = $this->generateResourceSummary($selectedResources);
     }
+    
+    return view('pages.contact.index', [
+        'selectedResources' => $selectedResources,
+        'resourceSummary' => $resourceSummary
+    ]);
+}
+
+/**
+ * Generate a formatted summary of selected resources.
+ */
+private function generateResourceSummary(array $resources): string
+{
+    if (empty($resources)) {
+        return '';
+    }
+    
+    $summary = "I'm interested in outsourcing the following resources:\n\n";
+    
+    // Group by role
+    $groupedResources = [];
+    foreach ($resources as $resource) {
+        $role = $resource['role'];
+        if (!isset($groupedResources[$role])) {
+            $groupedResources[$role] = [];
+        }
+        $groupedResources[$role][] = $resource['experience'];
+    }
+    
+    // Create formatted summary
+    foreach ($groupedResources as $role => $experiences) {
+        $summary .= "• {$role}: " . implode(', ', $experiences) . "\n";
+    }
+    
+    $summary .= "\nPlease contact me with more information about hiring these resources.";
+    
+    return $summary;
+}
 
     public function faq(): View
     {
@@ -122,5 +181,9 @@ class PageController extends Controller
     public function privacy(): View
     {
         return view('pages.others.privacy_and_policy');
+    }
+    public function working_process(): View
+    {
+        return view('pages.others.working_process');
     }
 }

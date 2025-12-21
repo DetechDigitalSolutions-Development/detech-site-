@@ -67,6 +67,8 @@
 
     @include('components.footer')
 
+    @include('pages.others.cookie')
+
     @livewireScripts
 
     <script src="{{ asset('js/app.js') }}"></script>

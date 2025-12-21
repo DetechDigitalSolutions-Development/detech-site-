@@ -43,7 +43,7 @@
                                     <li>
                                         <div class="card-blog-list">
                                             <div class="card-blog-list-media">
-                                                <a href="{{ route('blogs.show', $blog->id) }}">
+                                                <a href="{{ route('blogs.show', $blog->slug) }}">
                                                     <img src="{{ Storage::disk(config('public'))->url($blog->featured_img) }}" alt="blog image" width="1000" height="707" loading="lazy">
                                                 </a>
                                                 </div>
@@ -52,7 +52,7 @@
                                                     <div class="card-blog-meta-item text text-16">{{ $blog->created_at->format('jS M, Y') }}</div>
                                                 </div>
                                                 <h2 class="card-blog-heading heading text-20">
-                                                    <a href="{{ route('blogs.show', $blog->id) }}">{{ $blog->title }}</a>
+                                                    <a href="{{ route('blogs.show', $blog->slug) }}" class="heading text-20">{{ $blog->title }}</a>
                                                 </h2>
                                             </div>
                                         </div>

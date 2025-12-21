@@ -112,7 +112,7 @@ class SiteSettingsSeeder extends Seeder
 
             // General Settings
             [
-                'key' => 'site_name',
+                'key' => 'company_name',
                 'value' => 'Your Company Name',
                 'type' => 'text',
                 'group' => 'general',

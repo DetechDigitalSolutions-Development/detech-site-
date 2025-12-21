@@ -7,9 +7,8 @@
             'title' => 'Careers',
             'title_route' => 'careers',
             'sub_title' =>  $career->job_title,
-            'banner_image' => 'assets/img/banner/page-banner.png',
+            'banner_image' => 'assets/img/banner/Career.png',
         ])
-
         <!-- FAQ -->
         <div class="faq mt-100">
             <div class="container">
@@ -129,7 +128,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <button data-aos="fade-up" data-aos-delay="50" class="button button--primary"
+                                    <button type="submit" data-aos="fade-up" data-aos-delay="50" class="button button--secondary"
                                         aria-label="Ask Your Question">
                                         Submit Application
                                         <span class="svg-wrapper">

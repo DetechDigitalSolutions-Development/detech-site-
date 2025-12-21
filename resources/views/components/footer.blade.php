@@ -1,6 +1,6 @@
 <!-- Footer -->
 <footer class="mt-100">
-    <div class="footer-main bg-contain" style="background-image: url(assets/img/footer/footer-bg-large.jpg)">
+    <div class="footer-main bg-contain" style="background-image: url(/assets/img/footer/footer-bg-large.png)">
         <div class="footer-top">
             <div class="container-fluid">
                 <div class="row footer-custom-row">
@@ -82,7 +82,7 @@
                             ['AR/VR Integration', 'services.show', 'ar-vr-integration'],
                         ]],
                         ['Information', [
-                            ['Working Process', 'about'],
+                            ['Working Process', 'working-process'],
                             ['Privacy Policy', 'privacy'],
                             ['Terms & Conditions', 'terms'],
                             ['Faqs', 'faq']
@@ -113,7 +113,7 @@
                 <div class="row footer-bottom-row">
                     <div class="col-12 col-md-6 col-lg-6">
                         <div class="footer-copyright text text-16">
-                            Copyright ©<span class="current-year"></span> {{ setting('site_name', 'Detech') }}. All rights reserved.
+                            Copyright ©<span class="current-year"></span> {{ setting('company_name', 'Detech') }}. All rights reserved.
                         </div>
                     </div>
                     <div class="col-12 col-md-6 col-lg-6">

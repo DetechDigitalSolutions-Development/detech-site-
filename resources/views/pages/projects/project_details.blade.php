@@ -7,7 +7,7 @@
             'title' => 'Our Projects',
             'title_route' => 'projects',
             'sub_title' => $project->title,
-            'banner_image' => 'assets/img/banner/page-banner.png',
+            'banner_image' => 'assets/img/banner/Portfolio.png',
         ])
 
         <!-- Project Details -->

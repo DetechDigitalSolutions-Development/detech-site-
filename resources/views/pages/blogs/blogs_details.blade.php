@@ -7,7 +7,7 @@
             'title' => 'Our Blogs',
             'title_route' => 'blogs',
             'sub_title' => $blog->title,
-            'banner_image' => 'assets/img/banner/page-banner.png',
+            'banner_image' => 'assets/img/banner/Blog.png',
         ])
 
         <div class="page-blog-details mt-100">

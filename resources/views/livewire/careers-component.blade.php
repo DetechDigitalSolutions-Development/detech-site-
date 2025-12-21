@@ -1,62 +1,66 @@
-{{-- resources/views/livewire/careers-component.blade.php --}}
 <div wire:ignore.self class="careers-wrapper">
     <div class="col-lg-12 col-12 form" wire:key="careers-main-container">
         <!-- Search Widget -->
         <div class="field" data-aos="fade-up">
-    <form wire:submit.prevent class="form-blog-search">
-        <input type="text" id="blog-search-input" name="blog-search" placeholder="Search here" class="text-18"
-            wire:model.live.debounce.500ms="search" wire:keydown.enter.prevent>
+            <form wire:submit.prevent class="form-blog-search">
+                <input type="text" id="blog-search-input" name="blog-search" placeholder="Search here" 
+                    class="text-18" wire:model.live.debounce.500ms="search" wire:keydown.enter.prevent>
 
-        <div class="custom-select field text-18" role="combobox">
-            <div class="custom-select__trigger text-18" tabindex="0">
-                <span>
-                    @if ($selectedType)
-                        {{ ucfirst($selectedType) }}
-                    @else
-                        Select job type
-                    @endif
-                </span>
-            </div>
-            <div class="custom-select__options">
-                <div class="custom-select__option" wire:click="$set('selectedType', '')">
-                    All Job Types
-                </div>
-                @foreach ($jobTypes as $type)
-                    <div class="custom-select__option" wire:click="$set('selectedType', '{{ $type }}')">
-                        {{ ucfirst($type) }}
+                <!-- Job Type Dropdown -->
+                <div class="custom-select field text-18" role="combobox">
+                    <div class="custom-select__trigger text-18" tabindex="0">
+                        <span>
+                            @if ($selectedType)
+                                {{ ucfirst($selectedType) }}
+                            @else
+                                Select job type
+                            @endif
+                        </span>
                     </div>
-                @endforeach
-            </div>
+                    <div class="custom-select__options">
+                        <div class="custom-select__option" wire:click="$set('selectedType', '')">
+                            All Job Types
+                        </div>
+                        @foreach ($jobTypes as $type)
+                            <div class="custom-select__option" wire:click="$set('selectedType', '{{ $type }}')">
+                                {{ ucfirst($type) }}
+                            </div>
+                        @endforeach
+                    </div>
+                </div>
+
+                <!-- Category Dropdown -->
+                <div class="custom-select  text-18" role="combobox">
+                    <div class="custom-select__trigger text-18" tabindex="0">
+                        <span>
+                            @if ($selectedCategory)
+                                {{ $selectedCategory }}
+                            @else
+                                Select category
+                            @endif
+                        </span>
+                    </div>
+                    <div class="custom-select__options">
+                        <div class="custom-select__option" wire:click="$set('selectedCategory', '')">
+                            All Categories
+                        </div>
+                        @foreach ($categories as $category => $count)
+                            <div class="custom-select__option flex" wire:click="$set('selectedCategory', '{{ $category }}')">
+                                {{ $category }}
+                            </div>
+                        @endforeach
+                    </div>
+                </div>
+
+                <button type="button" class="button button--primary button--reset" wire:click="resetFilters">
+                    Reset
+                </button>
+            </form>
         </div>
-    <style>
-        /* .button--reset {
-            min-width: 100px;
-            width: 10%;
-        } */
-    </style>
-        <button type="button" class="button button--primary button--reset" wire:click="resetFilters" >
-            Reset
-        </button>
-    </form>
-</div>
 
-<div class="field buttons" data-aos="fade-up" data-aos-delay="200">
-    <button class="button button--primary {{ !$selectedCategory ? 'active' : '' }}"
-        wire:click="$set('selectedCategory', '')">
-        All
-        <span class="svg-wrapper">{{ $totalJobsCount }}</span>
-    </button>
-
-    @foreach ($categories as $category => $count)
-        <button class="button button--primary m-2 {{ $selectedCategory === $category ? 'active' : '' }}"
-            wire:click="selectCategory('{{ $category }}')">
-            {{ $category }}
-            <span class="svg-wrapper">{{ $count }}</span>
-        </button>
-    @endforeach
-</div>
-
-        <div class="careers-list" data-aos="fade-up" data-aos-delay="400">
+        <!-- Removed the category buttons row -->
+        
+        <div class="careers-list" data-aos="fade-up" data-aos-delay="200">
             @forelse($careers as $career)
                 <div class="career-item" @if (!$search && !$selectedType && !$selectedCategory) data-aos="fade-up" @endif
                     wire:key="career-{{ $career->id }}">
@@ -108,21 +112,8 @@
                             </div>
                         </div>
                     </a>
-
-                    <!-- Optional: Quick preview content -->
-                    <div class="career-preview text-16 mt-20" style="display: none;">
-                        <div class="preview-content">
-                            {{ Str::limit(strip_tags($career->job_content), 150) }}
-                        </div>
-                        <div class="apply-section mt-20">
-                            <a href="{{ route('careers.apply', $career->id) }}" class="button button--primary">
-                                Apply Now
-                            </a>
-                        </div>
-                    </div>
                 </div>
             @empty
-
                 <div class="career-item" data-aos="fade-up">
                     <div class="career-header heading text-22 text-center py-40">
                         @if ($search || $selectedType || $selectedCategory)
@@ -141,9 +132,6 @@
         </div>
     </div>
 </div>
-
-
-
 @script
     <script>
         Livewire.hook('morph.updated', ({

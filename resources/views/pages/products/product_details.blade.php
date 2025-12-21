@@ -7,7 +7,7 @@
             'title' => 'Our Products',
             'title_route' => 'products',
             'sub_title' => $product->title,
-            'banner_image' => 'assets/img/banner/page-banner.png',
+            'banner_image' => 'assets/img/banner/OurProduct_top.png',
         ])
 
         <!-- Project Details -->

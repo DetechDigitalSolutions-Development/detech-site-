@@ -6,6 +6,7 @@ use App\Models\Career;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\CareerApplicationMail;
+use App\Mail\ApplicationConfirmation;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Storage;
@@ -150,8 +151,6 @@ class CareerController extends Controller
         // ->with('success', 'Job posting deleted successfully.');
     }
 
-    
-    
     public function submitApplication(Request $request, $id)
     {
         // Log the incoming request for debugging
@@ -234,20 +233,41 @@ class CareerController extends Controller
 
             // Get recipient email - use a default if not configured
             $recipientEmail = config('mail.from.address', 'admin@detech.com');
-            Log::info('Sending email to', ['email' => $recipientEmail]);
+            Log::info('Sending emails to admin and applicant', [
+                'admin_email' => $recipientEmail,
+                'applicant_email' => $applicationData['email']
+            ]);
 
-            // Send email to admin
+            // 1. Send notification to admin
             Mail::to($recipientEmail)
                 ->send(new CareerApplicationMail($applicationData));
+            
+            Log::info('Admin notification sent successfully');
 
-            Log::info('Email sent successfully');
+            // 2. Prepare career details for confirmation email
+            $careerDetails = [
+                'job_title' => $career->job_title,
+                'job_type' => $career->job_type,
+                'job_location' => $career->job_location,
+                'job_category' => $career->job_category,
+                'company_name' => setting('company_name', 'Detech'),
+                'company_email' => setting('company_email', 'careers@example.com'),
+                'company_phone' => setting('company_tel_no', $default = null) ,
+                'application_date' => now()->format('F j, Y'),
+                'application_id' => 'APP' . str_pad($career->id, 3, '0', STR_PAD_LEFT) . '-' . time(),
+            ];
 
-            // Optional: Keep the file for record keeping
-            // Or delete it after email is sent:
-            // Storage::disk('public')->delete($filePath);
-            // Log::info('File deleted from storage');
+            // 3. Send confirmation email to applicant
+            Mail::to($applicationData['email'])
+                ->send(new ApplicationConfirmation($applicationData, $careerDetails));
+            
+            Log::info('Application confirmation sent successfully to applicant');
 
-            return back()->with('success', 'Your application has been submitted successfully! We will contact you soon.');
+            // Optional: Clean up file after emails are sent
+            Storage::disk('public')->delete($filePath);
+            Log::info('File deleted from storage');
+
+            return back()->with('success', 'Your application has been submitted successfully! We have sent a confirmation email to ' . $applicationData['email']);
 
         } catch (\Exception $e) {
             Log::error('Application Submission Error', [
@@ -261,11 +281,15 @@ class CareerController extends Controller
             
             // User-friendly error messages
             if (strpos($e->getMessage(), 'mail') !== false) {
-                $errorMessage .= 'There was an issue sending the email. Please try again later.';
+                $errorMessage .= 'There was an issue sending emails, but your application has been recorded.';
+                // Still save record if needed (you might want to store applications in database)
+                // Application::create($request->all() + ['career_id' => $id]);
+                return back()
+                    ->with('warning', $errorMessage);
             } elseif (strpos($e->getMessage(), 'storage') !== false) {
                 $errorMessage .= 'There was an issue uploading your file. Please check the file size and format.';
             } else {
-                $errorMessage .= 'Error: ' . $e->getMessage();
+                $errorMessage .= 'Please try again or contact us directly.';
             }
             
             return back()

@@ -1,7 +1,7 @@
 <!-- Hero Banner -->
 <div class="hero-banner with-floating-header">
     <div class="media media-bg">
-        <img src="assets/img/banner/home.png" alt="slider background" width="1920" height="100" loading="eager">
+        <img src="assets/img/banner/front image1.png" alt="slider background" width="1920" height="100" loading="eager">
     </div>
     <div class="container-fluid">
         <div class="row align-items-center">

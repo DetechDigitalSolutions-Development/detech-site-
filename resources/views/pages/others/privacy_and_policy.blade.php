@@ -21,7 +21,7 @@
                         </div>
 
                         <div class="blog-description">
-                            <p class="lead">
+                            <p>
                                 At Detech, protecting your privacy and personal data is a top priority. We are committed to respecting your rights and handling personal data in accordance with the General Data Protection Regulation (GDPR) and other applicable data protection laws.
                             </p>
                             

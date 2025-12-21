@@ -9,7 +9,7 @@
         <div class="card-project-content-absolute">
             <div class="card-project-content">
                 <h2 class="heading text-24">{{ $project->title }}</h2>
-                <p class="text text-16">{{ $project->categories[0] ?? null }}</p>
+                <p class="text text-16">{{ \App\Models\Project::getTypeOptions()[$project->type] ?? null }}</p>
             </div>
         </div>
         <span class="svg-wrapper icon-project-link">

@@ -19,12 +19,12 @@
                 </div>
             </div>
             <h2 class="card-blog-heading heading text-22">
-                <a href="{{ route('blogs.show', $blog->id) }}" class="heading text-22">
+                <a href="{{ route('blogs.show', $blog->slug) }}" class="heading text-22">
                     {{ $blog->title }}
                 </a>
             </h2>
         </div>
-        <a class="card-blog-bottom" href="{{ route('blogs.show', $blog->id) }}" aria-label="Blog details">
+        <a class="card-blog-bottom" href="{{ route('blogs.show', $blog->slug) }}" aria-label="Blog details">
             {{-- Loop through the categories --}}
             @if(isset($blog->categories) && count($blog->categories) > 0)
                 <span class="blog-tag subheading subheading-bg text-16 fw-500">

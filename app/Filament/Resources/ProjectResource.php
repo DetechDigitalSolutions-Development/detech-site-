@@ -168,7 +168,7 @@ class ProjectResource extends Resource
                                 'Custom Software',
                             ])
                             ->nullable()
-                            ->helperText('Add relevant categories (comma separated)')
+                            ->helperText('Add relevant categories (Press enter to separated)')
                             ->columnSpanFull(),
 
                         Forms\Components\Hidden::make('owner')

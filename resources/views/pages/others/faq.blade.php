@@ -53,7 +53,7 @@
                             </div>
                             <div class="faq-form-wrap radius18" data-aos="fade-up">
                                 <form action="#" class="faq-form">
-                                    <h2 class="heading text-24">Have any Question</h2>
+                                    <h2 class="heading text-24" data-aos="fade-up">Have any Question</h2>
                                     <div class="field" data-aos="fade-up">
                                         <label for="FaqForm-name" class="visually-hidden">
                                             Your Name
@@ -67,7 +67,7 @@
                                         </label>
                                         <textarea id="FaqForm-body" class="text text-16" rows="4" placeholder="Write Message.." name="Message" required></textarea>
                                     </div>
-                                    <a href="#" data-aos="fade-up" data-aos-delay="50" class="button button--primary"
+                                    <a href="#" data-aos="fade-up" data-aos-delay="50" class="button button--secondary"
                                         aria-label="Ask Your Question">
                                         Ask Question Now
                                         <span class="svg-wrapper">

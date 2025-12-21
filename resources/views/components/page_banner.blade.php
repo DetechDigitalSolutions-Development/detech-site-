@@ -1,5 +1,5 @@
       <!-- Page Banner -->
-      @php 
+      @php
           $sub_title = $sub_title ?? null;
           $title_route = $title_route ?? null;
           $banner_image = $banner_image ?? null;
@@ -13,18 +13,18 @@
           </picture>
           <div class="page-banner-content">
               <div class="container text-center">
-                @if($sub_title)
-                  <h1 class="heading text-50 fw-700 mt-4" data-aos="fade-up">
-                      {{ $sub_title }}
-                  </h1>
-                @else
-                  <h1 class="heading text-80 fw-700" data-aos="fade-up">
-                      {{ $title }}
-                  </h1>
-                @endif
+                  @if ($sub_title)
+                      <h1 class="heading text-50 fw-700 mt-4 d-none d-lg-block" data-aos="fade-up">
+                          {{ $sub_title }}
+                      </h1>
+                  @else
+                      <h1 class="heading text-80 fw-700" data-aos="fade-up">
+                          {{ $title }}
+                      </h1>
+                  @endif
                   <ul class="breadcrumb list-unstyled" data-aos="fade-up" data-aos-delay="100">
                       <li>
-                          <a href="{{ route('home') }}" class="text text-18" aria-label="Home Page">
+                          <a href="{{ route('home') }}" class="heading text-18" aria-label="Home Page">
                               Home
                           </a>
                       </li>
@@ -37,7 +37,8 @@
                           </svg>
                       </li>
                       <li>
-                          <a @if($title_route) href="{{ route($title_route) }}" @endif  role="link" aria-disabled="true" class="text text-18 active">
+                          <a @if ($title_route) href="{{ route($title_route) }}" @endif role="link"
+                              aria-disabled="true" class="heading text-18 active">
                               {{ $title }}
                           </a>
                       </li>
@@ -51,7 +52,7 @@
                               </svg>
                           </li>
                           <li>
-                              <a role="link" aria-disabled="true" class="text text-18 active">
+                              <a role="link" aria-disabled="true" class="heading text-18 active">
                                   {{ $sub_title }}
                               </a>
                           </li>

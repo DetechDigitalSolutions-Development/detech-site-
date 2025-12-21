@@ -96,14 +96,14 @@
                                                 // $siteSlug = $project->site_slug ?? null;
                                                 // $productUrl = $siteSlug ? route('product.site', $siteSlug) : '#';
                                             @endphp
-                                            <a class="menu-link heading fw-300" href="{{ route('projects.show', $project->id) }}">
+                                            <a class="menu-link heading fw-300" href="{{ route('projects.show', $project->slug) }}">
                                                 FEATURED PROJECT
                                             </a>
 
                                             <ul class="reset-submenu list-unstyled submenu-color">
                                                 <li class="nav-item">
                                                     <a class="menu-link megamenu-image-wrap"
-                                                        href="{{ route('projects.show', $project->id) }}">
+                                                        href="{{ route('projects.show', $project->slug) }}">
                                                         <picture>
                                                             <source media="(max-width: 575px)"
                                                                 srcset="{{ asset('assets/img/menu/575.jpg') }}">

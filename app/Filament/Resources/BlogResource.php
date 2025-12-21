@@ -26,22 +26,38 @@ class BlogResource extends Resource
             ->schema([
                 Forms\Components\TextInput::make('title')
                     ->required()
-                    ->maxLength(255),
+                    ->maxLength(255)
+                    ->live(onBlur: true)
+                    ->afterStateUpdated(function ($state, $set, $operation) {
+                        if ($operation === 'create' || $operation === 'edit') {
+                            $set('slug', \Illuminate\Support\Str::slug($state));
+                        }
+                    }),
+                
+                Forms\Components\TextInput::make('slug')
+                    ->required()
+                    ->maxLength(255)
+                    ->unique(ignoreRecord: true)
+                    ->helperText('Auto-generated from title, but can be customized'),
+                
                 Forms\Components\FileUpload::make('featured_img')
-                    ->directory('featured_img/blog') // Store in 'storage/app/public/thumbnails/posts'
-                    ->image() // Restrict to image files
+                    ->directory('featured_img/blog')
+                    ->image()
                     ->imageEditor()
                     ->previewable()
                     ->nullable()
                     ->downloadable()
-                    ->deletable() // Allows deleting the file from the form
-                    ->disk('public'), // Use the 'public' disk
+                    ->deletable()
+                    ->disk('public'),
+                
                 Forms\Components\RichEditor::make('content_section_1')
                     ->label('Content Section 1')
                     ->required(),
+                
                 Forms\Components\RichEditor::make('content_section_2')
                     ->label('Content Section 2')
                     ->required(),
+                
                 Forms\Components\FileUpload::make('blog_imgs')
                     ->image()
                     ->nullable()
@@ -52,10 +68,13 @@ class BlogResource extends Resource
                     ->directory('media/blog')
                     ->downloadable()
                     ->deletable(),
+                
                 Forms\Components\Textarea::make('quote_text')
                     ->nullable(),
+                
                 Forms\Components\TagsInput::make('categories')
                     ->required(),
+                
                 Forms\Components\TagsInput::make('tags')
                     ->nullable(),
             ]);
@@ -67,11 +86,18 @@ class BlogResource extends Resource
             ->columns([
                 Tables\Columns\TextColumn::make('title')
                     ->searchable(),
+                
+                Tables\Columns\TextColumn::make('slug')
+                    ->searchable(),
+                
                 Tables\Columns\ImageColumn::make('featured_img'),
+                
                 Tables\Columns\TagsColumn::make('categories')
                     ->searchable(),
+                
                 Tables\Columns\TagsColumn::make('tags')
                     ->searchable(),
+                
                 Tables\Columns\TextColumn::make('created_at')
                     ->dateTime()
                     ->sortable()

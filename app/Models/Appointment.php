@@ -9,11 +9,6 @@ class Appointment extends Model
 {
     use HasFactory;
 
-    /**
-     * The attributes that are mass assignable.
-     *
-     * @var array<string>
-     */
     protected $fillable = [
         'name',
         'email',
@@ -22,13 +17,9 @@ class Appointment extends Model
         'read',
     ];
 
-    /**
-     * The attributes that should be cast.
-     *
-     * @var array<string, string>
-     */
     protected $casts = [
         'read' => 'boolean',
+        'created_at' => 'datetime',
     ];
 
     /**
@@ -48,11 +39,44 @@ class Appointment extends Model
     }
 
     /**
+     * Scope a query to only include today's appointments.
+     */
+    public function scopeToday($query)
+    {
+        return $query->whereDate('created_at', today());
+    }
+
+    /**
+     * Scope a query to only include this week's appointments.
+     */
+    public function scopeThisWeek($query)
+    {
+        return $query->whereBetween('created_at', [
+            now()->startOfWeek(),
+            now()->endOfWeek()
+        ]);
+    }
+
+    /**
+     * Get appointment statistics.
+     */
+    public static function getStatistics()
+    {
+        return [
+            'total' => self::count(),
+            'unread' => self::unread()->count(),
+            'today' => self::today()->count(),
+            'this_week' => self::thisWeek()->count(),
+        ];
+    }
+
+    /**
      * Mark the appointment as read.
      */
     public function markAsRead()
     {
         $this->update(['read' => true]);
+        return $this;
     }
 
     /**
@@ -61,5 +85,14 @@ class Appointment extends Model
     public function markAsUnread()
     {
         $this->update(['read' => false]);
+        return $this;
+    }
+
+    /**
+     * Get formatted reference ID.
+     */
+    public function getReferenceIdAttribute()
+    {
+        return 'APP' . str_pad($this->id, 6, '0', STR_PAD_LEFT);
     }
 }

@@ -3,7 +3,7 @@
 @section('content')
     <main>
       <!-- Page Banner -->
-      @include('components.page_banner',['title'=>'Our Services','banner_image'=>'assets/img/banner/ServiceDetail.png'])
+      @include('components.page_banner',['title'=>'Our Services','banner_image'=>'assets/img/banner/Service.png'])
 
       <!-- services card -->
       @include('pages.services.services_cards_section')

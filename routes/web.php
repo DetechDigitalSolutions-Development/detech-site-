@@ -60,6 +60,7 @@ Route::post('/contact', [ContactFormController::class, 'store'])->name('appointm
 Route::get('/faq', [PageController::class, 'faq'])->name('faq');
 Route::get('/terms', [PageController::class, 'terms'])->name('terms');
 Route::get('/privacy', [PageController::class, 'privacy'])->name('privacy');
+Route::get('/working-process', [PageController::class, 'working_process'])->name('working-process');
 
 // Careers (conditional)
 if(setting_bool('career_page_enabled')) {
@@ -78,22 +79,39 @@ Route::get('/{slug}', function ($slug) {
         ->where('is_active', true)
         ->firstOrFail();
     
-    if (!$productSite->extracted_path) {
-        abort(404, 'Site files not extracted yet');
+    // CASE 1: If it has an external product link, redirect to it
+    if ($productSite->product_link) {
+        return redirect()->away($productSite->product_link);
     }
     
-    $indexFile = $productSite->getIndexFilePath();
-    
-    if (!$indexFile) {
-        abort(404, 'Index file not found');
+    // CASE 2: If it has a zip upload with extracted path
+    if ($productSite->site_file && $productSite->extracted_path) {
+        $indexFile = $productSite->getIndexFilePath();
+        
+        if (!$indexFile) {
+            abort(404, 'Index file not found in extracted site');
+        }
+        
+        $filePath = storage_path('app/public/' . $indexFile);
+        
+        if (!file_exists($filePath)) {
+            abort(404, 'Site file not found');
+        }
+        
+        $mimeType = mime_content_type($filePath);
+        
+        return response()->file($filePath, [
+            'Content-Type' => $mimeType,
+        ]);
     }
     
-    $filePath = storage_path('app/public/' . $indexFile);
-    $mimeType = mime_content_type($filePath);
+    // CASE 3: Has zip file but not extracted yet
+    if ($productSite->site_file && !$productSite->extracted_path) {
+        abort(404, 'Site files not extracted yet. Please extract the zip file first.');
+    }
     
-    return Response::file($filePath, [
-        'Content-Type' => $mimeType,
-    ]);
+    // Default: No valid configuration found
+    abort(404, 'Site configuration not found');
 })->where('slug', '[a-zA-Z0-9\-]+')->name('product.site');
 
 // Salary Guide Public Page

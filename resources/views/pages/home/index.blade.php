@@ -9,17 +9,17 @@
       <!-- Capabilities Section -->
       @include('pages.home.capabilities_section')
 
+      <!-- Brand Logos -->
+      @include('pages.about.brand_logos_section')
+
       <!-- Our Services -->
       @include('pages.home.our_services_section', ['services' => $services])
-      
+
       <!-- Recent Projects -->
       @include('pages.home.recent_projects_section',['recentProjects' => $recentProjects])
 
       <!-- Why Choose Us -->
       @include('components.why_choose_us')
-
-      <!-- Brand Logos -->
-      @include('pages.about.brand_logos_section')
 
       <!-- Pricing Plan -->
       @include('components.pricing_plan')

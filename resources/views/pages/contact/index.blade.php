@@ -5,7 +5,7 @@
         <!-- Page Banner -->
         @include('components.page_banner', [
             'title' => 'Contact Us',
-            'banner_image' => 'assets/img/banner/page-banner.png',
+            'banner_image' => 'assets/img/banner/ContactUs.png',
         ])
 
         <!-- Contact Form -->
@@ -55,7 +55,7 @@
                                 <div class="card-icon-text card-icon-text-horizontal">
                                     <div class="svg-wrapper" data-aos="fade-up">
                                         <svg viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                            <rect width="80" height="80" rx="10" fill="#20282D" />
+                                            <rect width="80" height="80" rx="10" fill="rgba(2, 19, 53, 1)" />
                                             <path
                                                 d="M47.7344 18C47.2598 18 46.875 18.3848 46.875 18.8594V22.8125C46.875 23.287 47.2598 23.6719 47.7344 23.6719C48.2089 23.6719 48.5938 23.287 48.5938 22.8125V18.8594C48.5938 18.3848 48.2089 18 47.7344 18Z"
                                                 fill="white" />
@@ -95,7 +95,7 @@
                                 <div class="card-icon-text card-icon-text-horizontal">
                                     <div class="svg-wrapper" data-aos="fade-up">
                                         <svg viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                            <rect width="80" height="80" rx="10" fill="#20282D" />
+                                            <rect width="80" height="80" rx="10" fill="rgba(2, 19, 53, 1)" />
                                             <path
                                                 d="M40.7812 51.7188C40.7812 52.1503 40.4315 52.5 40 52.5C39.5685 52.5 39.2188 52.1503 39.2188 51.7188C39.2188 51.2872 39.5685 50.9375 40 50.9375C40.4315 50.9375 40.7812 51.2872 40.7812 51.7188Z"
                                                 fill="white" />
@@ -144,13 +144,19 @@
         </div>
 
         <!-- Google Map -->
-        <div class="google-map">
-            <div class="iframe-wrapper">
-                <iframe
-                    src="https://www.google.com/maps/embed?pb=!1m17!1m12!1m3!1d413.30925959761186!2d80.02960548057536!3d9.759079584406656!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m2!1m1!2zOcKwNDUnMzMuNSJOIDgwwrAwMSc0Ni4yIkU!5e0!3m2!1sen!2slk!4v1765726873730!5m2!1sen!2slk"
-                    title="Google map" width="1920" height="600" style="border: 0" allowfullscreen="" loading="lazy"
-                    referrerpolicy="no-referrer-when-downgrade"></iframe>
-            </div>
-        </div>
+<div class="google-map">
+    <div class="iframe-wrapper">
+        <iframe
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3960.207050694057!2d80.02960549999999!3d9.7590796!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zOcKwNDUnMzMuNSJOIDgwwrAwMSc0Ni4yIkU!5e0!3m2!1sen!2slk!4v1650000000000!5m2!1sen!2slk"
+            title="Detech Location" 
+            width="1920" 
+            height="600" 
+            style="border: 0" 
+            allowfullscreen="" 
+            loading="lazy"
+            referrerpolicy="no-referrer-when-downgrade">
+        </iframe>
+    </div>
+</div>
     </main>
 @endsection

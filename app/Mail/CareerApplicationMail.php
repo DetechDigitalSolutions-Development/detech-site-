@@ -29,7 +29,7 @@ class CareerApplicationMail extends Mailable
     public function build()
     {
         $mail = $this->subject('New Career Application: ' . $this->applicationData['position'])
-            ->view('emails.career_application');
+            ->view('emails.careers.career_application');
         
         // Attach file if it exists
         if (isset($this->applicationData['cv_path']) && file_exists($this->applicationData['cv_path'])) {

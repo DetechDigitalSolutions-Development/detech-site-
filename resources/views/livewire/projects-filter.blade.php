@@ -1,7 +1,7 @@
 <div wire:ignore.self class="projects-wrapper">
     <div class="col-lg-12 col-12 form" wire:key="projects-main-container">
         <!-- Search and Filter Widget -->
-        <div class="field" data-aos="fade-up">
+        <div class="field container" data-aos="fade-up">
             <form wire:submit.prevent class="form-blog-search">
                 <input type="text" id="projects-search-input" name="projects-search" placeholder="Search projects..." 
                        class="text-18" wire:model.live.debounce.500ms="search" wire:keydown.enter.prevent>
@@ -85,8 +85,8 @@
         </div>
 
         <!-- Active Filters Display -->
-        @if($search || $selectedType || $selectedIndustry || $selectedRegion)
-        <div class="active-filters mb-4" data-aos="fade-up" data-aos-delay="100">
+        {{-- @if($search || $selectedType || $selectedIndustry || $selectedRegion)
+        <div class="active-filters mb-4 container" data-aos="fade-up" data-aos-delay="100">
             <div class="text text-16">
                 <strong>Active Filters:</strong>
                 @if($search)
@@ -103,7 +103,7 @@
                 @endif
             </div>
         </div>
-        @endif
+        @endif --}}
 
         <!-- Projects Grid -->
         <div class="container-fluid">

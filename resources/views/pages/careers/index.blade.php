@@ -6,7 +6,7 @@
         <!-- Page Banner -->
         @include('components.page_banner', [
             'title' => 'Careers',
-            'banner_image' => 'assets/img/banner/page-banner.png',
+            'banner_image' => 'assets/img/banner/Career.png',
         ])
 
         <div class="faq mt-100">

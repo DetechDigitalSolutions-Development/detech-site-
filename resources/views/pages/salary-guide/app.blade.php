@@ -14,11 +14,27 @@
     <link rel="shortcut icon" href="{{ asset('assets/img/favicon.png') }}" type="image/x-icon">
     
     <style>
+        /* :root {
+            --primary: #205781;
+            --secondary: #4F959D;
+            --accent: #98D2C0;
+            --background: #F6F8D5;
+        } */
+        .from-primary { background-image: linear-gradient(to right, var(--primary), var(--secondary)); }
+        .to-secondary { background-image: linear-gradient(to right, var(--primary), var(--secondary)); }
+        .text-primary { color: var(--primary); }
+        .text-secondary { color: var(--secondary); }
+        .bg-primary { background-color: var(--primary); }
+        .bg-secondary { background-color: var(--secondary); }
+        .bg-accent { background-color: var(--accent); }
+        .bg-background { background-color: var(--background); }
+        .ring-primary { --tw-ring-color: var(--primary); }
+        .hover\:text-primary:hover { color: var(--primary); }
         :root {
-            --primary-color: #205781;
-            --secondary-color: #4F959D;
-            --accent-color: #98D2C0;
-            --background-color: #F6F8D5;
+            --primary: #003a5e;
+            --secondary: #0066a5;
+            --accent: #1bb1de;
+            --background: #F6F8D5;
         }
         
         body {

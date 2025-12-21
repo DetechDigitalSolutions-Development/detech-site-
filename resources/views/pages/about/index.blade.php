@@ -3,7 +3,7 @@
 @section('content')
 <main>
       <!-- Page Banner -->
-      @include('components.page_banner',['title'=>'About Us','banner_image'=>'assets/img/banner/page-banner.png'])
+      @include('components.page_banner',['title'=>'About Us','banner_image'=>'assets/img/banner/AboutUs.png'])
 
       <!-- Our Company -->
        @include('pages.about.our_company_section')
@@ -16,9 +16,11 @@
 
       <!-- Our Team -->
       @include('components.our_team',['teams'=>$teams])
-                  
+
       <!-- Testimonial -->
-      @include('pages.about.testimonials_section',['testimonials' => $testimonials])
+      @include('pages.home.testimonials_section',['testimonials' => $testimonials])            
+      {{-- <!-- Testimonial -->
+      @include('pages.about.testimonials_section',['testimonials' => $testimonials]) --}}
       
       <!-- FAQ -->
       @include('components.faq')

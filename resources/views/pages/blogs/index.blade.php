@@ -3,7 +3,7 @@
 @section('content')
     <main>
       <!-- Page Banner -->
-      @include('components.page_banner',['title'=>'Our Blogs','banner_image'=>'assets/img/banner/page-banner.png'])
+      @include('components.page_banner',['title'=>'Our Blogs','banner_image'=>'assets/img/banner/Blog.png'])
 
       <!-- Blog List -->
       <div class="page-blog mt-100">
