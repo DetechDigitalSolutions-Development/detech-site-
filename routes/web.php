@@ -51,7 +51,7 @@ Route::get('/blogs/{blog}', [BlogController::class, 'show'])->name('blogs.show')
 
 // Teams
 Route::get('/teams', [PageController::class, 'teams'])->name('teams');
-Route::get('/teams/{team}', [TeamController::class, 'show'])->name('teams.show');
+// Route::get('/teams/{team}', [TeamController::class, 'show'])->name('teams.show');
 
 // Pages
 Route::get('/pricing', [PageController::class, 'pricing'])->name('pricing');

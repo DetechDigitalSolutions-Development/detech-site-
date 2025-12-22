@@ -105,7 +105,10 @@
                                             <div class="download-text">
                                                 <div class="text text-16">Business is a marketing discipline focused on
                                                     growing visibility organ (non-paid) technic required.</div>
-                                                <a href="#" class="download-button text text-14 fw-600">Click here to
+                                                    @php
+                                                        $file=setting('company_brochure', $default = null);
+                                                    @endphp
+                                                <a href="{{ Storage::disk(config('public'))->url($file)}}" class="download-button text text-14 fw-600">Click here to
                                                     download</a>
                                             </div>
                                         </div>

@@ -139,6 +139,13 @@ class SiteSettingsSeeder extends Seeder
                 'group' => 'clients',
                 'description' => 'Upload client company logos to display on the website',
             ],
+            [
+                'key' => 'company_brochure',
+                'value' => '',
+                'type' => 'file',
+                'group' => 'general',
+                'description' => 'Company brochure PDF file',
+            ],
         ];
 
         foreach ($settings as $setting) {

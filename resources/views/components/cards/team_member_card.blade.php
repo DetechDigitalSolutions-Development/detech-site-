@@ -8,8 +8,10 @@
         loading="lazy">
     <div class="card-team-content-absolute">
         <div class="card-team-content">
-            <a href="{{ route('teams.show', $team->id) }}" aria-label="team details"
+            <a aria-label="team details"
                 class="heading text-22 fw-600">{{ $team->name }}</a>
+            {{-- <a href="{{ route('teams.show', $team->id) }}" aria-label="team details"
+                class="heading text-22 fw-600">{{ $team->name }}</a> --}}
             <p class="text text-18">{{ $team->designation }}</p>
         </div>
     </div>

@@ -9,7 +9,6 @@ use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 use Livewire\Features\SupportFileUploads\TemporaryUploadedFile;
@@ -19,10 +18,15 @@ class SiteSettingResource extends Resource
     protected static ?string $model = SiteSetting::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-cog-6-tooth';
+
     protected static ?string $navigationGroup = 'Content Management';
+
     protected static ?int $navigationSort = 1;
+
     protected static ?string $navigationLabel = 'Site Settings';
+
     protected static ?string $modelLabel = 'Site Setting';
+
     protected static ?string $pluralModelLabel = 'Site Settings';
 
     public static function form(Form $form): Form
@@ -59,6 +63,7 @@ class SiteSettingResource extends Resource
                                 'date' => 'Date',
                                 'multiple_images' => 'Multiple Images',
                                 'image' => 'Single Image',
+                                'file' => 'File Upload',
                             ])
                             ->reactive()
                             ->afterStateUpdated(fn ($state, Forms\Set $set) => $set('value', '')),
@@ -73,6 +78,8 @@ class SiteSettingResource extends Resource
                                 'clients' => 'Clients',
                                 'seo' => 'SEO',
                                 'appearance' => 'Appearance',
+                                'legal' => 'Legal Documents',
+                                'documents' => 'Documents',
                             ]),
 
                         Forms\Components\Group::make()
@@ -88,8 +95,7 @@ class SiteSettingResource extends Resource
                                         ->onColor('success')
                                         ->offColor('danger')
                                         ->inline(false)
-                                        ->formatStateUsing(fn ($state, $record) => 
-                                            $state === '1' || $state === 1 || $state === true
+                                        ->formatStateUsing(fn ($state, $record) => $state === '1' || $state === 1 || $state === true
                                         ),
                                 ],
                                 'number' => [
@@ -119,8 +125,7 @@ class SiteSettingResource extends Resource
                                         ->disk('public')
                                         ->directory('settings/client-logos')
                                         ->getUploadedFileNameForStorageUsing(
-                                            fn (TemporaryUploadedFile $file): string => 
-                                                Str::random(20) . '.' . $file->getClientOriginalExtension()
+                                            fn (TemporaryUploadedFile $file): string => Str::random(20).'.'.$file->getClientOriginalExtension()
                                         )
                                         ->maxFiles(20)
                                         ->reorderable()
@@ -131,16 +136,17 @@ class SiteSettingResource extends Resource
                                             if (empty($state)) {
                                                 return [];
                                             }
-                                            
+
                                             if (is_string($state)) {
                                                 try {
                                                     $decoded = json_decode($state, true);
+
                                                     return is_array($decoded) ? $decoded : [];
                                                 } catch (\Exception $e) {
                                                     return [];
                                                 }
                                             }
-                                            
+
                                             return $state;
                                         })
                                         ->dehydrateStateUsing(function ($state) {
@@ -148,6 +154,7 @@ class SiteSettingResource extends Resource
                                             if (is_array($state)) {
                                                 return json_encode($state);
                                             }
+
                                             return $state;
                                         })
                                         ->loadingIndicatorPosition('left')
@@ -162,6 +169,27 @@ class SiteSettingResource extends Resource
                                         ->directory('settings')
                                         ->columnSpanFull()
                                         ->helperText('Upload a single image'),
+                                ],
+                                'file' => [
+                                    Forms\Components\FileUpload::make('value')
+                                        ->acceptedFileTypes([
+                                            'application/pdf',
+                                            'application/msword',
+                                            'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
+                                            'application/vnd.ms-excel',
+                                            'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
+                                            'application/zip',
+                                            'text/csv',
+                                            'application/vnd.ms-powerpoint',
+                                            'application/vnd.openxmlformats-officedocument.presentationml.presentation',
+                                        ])
+                                        ->disk('public')
+                                        ->directory('settings/files')
+                                        ->preserveFilenames()
+                                        ->maxSize(10240) // 10MB
+                                        ->helperText('Upload PDF, DOC, Excel, or other files. Max 10MB.')
+                                        ->columnSpanFull()
+                                        ->downloadable(),
                                 ],
                                 default => [
                                     Forms\Components\TextInput::make('value')
@@ -192,23 +220,31 @@ class SiteSettingResource extends Resource
                         if ($record->type === 'boolean') {
                             return $state ? 'Yes' : 'No';
                         }
-                        
+
                         if ($record->type === 'multiple_images') {
                             try {
                                 $logos = json_decode($state, true);
-                                if (is_array($logos) && !empty($logos)) {
-                                    return count($logos) . ' logo(s)';
+                                if (is_array($logos) && ! empty($logos)) {
+                                    return count($logos).' logo(s)';
                                 }
+
                                 return 'No logos';
                             } catch (\Exception $e) {
                                 return 'Invalid data';
                             }
                         }
-                        
+
                         if ($record->type === 'image' && $state) {
                             return 'Image uploaded';
                         }
-                        
+
+                        // Add this for file type
+                        if ($record->type === 'file' && $state) {
+                            $filename = basename($state);
+
+                            return $filename.' (File)';
+                        }
+
                         return $state;
                     }),
 
@@ -264,6 +300,7 @@ class SiteSettingResource extends Resource
                         'boolean' => 'Boolean',
                         'multiple_images' => 'Multiple Images',
                         'image' => 'Image',
+                        'file' => 'File',
                     ]),
             ])
             ->actions([

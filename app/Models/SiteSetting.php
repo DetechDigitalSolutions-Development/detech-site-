@@ -4,8 +4,8 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Facades\Storage;
 
 class SiteSetting extends Model
 {
@@ -16,7 +16,7 @@ class SiteSetting extends Model
         'value',
         'type',
         'group',
-        'description'
+        'description',
     ];
 
     protected $casts = [
@@ -27,7 +27,8 @@ class SiteSetting extends Model
         'decoded_images',
         'boolean_value',
         'image_url',
-        'image_urls'
+        'image_urls',
+        'file_url',
     ];
 
     /**
@@ -36,8 +37,9 @@ class SiteSetting extends Model
     public static function getValue($key, $default = null)
     {
         // Try to get from cache first for better performance
-        return Cache::remember('setting_' . $key, 3600, function () use ($key, $default) {
+        return Cache::remember('setting_'.$key, 3600, function () use ($key, $default) {
             $setting = self::where('key', $key)->first();
+
             return $setting ? $setting->value : $default;
         });
     }
@@ -51,10 +53,10 @@ class SiteSetting extends Model
             ['key' => $key],
             ['value' => $value]
         );
-        
+
         // Clear cache for this setting
-        Cache::forget('setting_' . $key);
-        
+        Cache::forget('setting_'.$key);
+
         return $setting;
     }
 
@@ -64,6 +66,7 @@ class SiteSetting extends Model
     public static function getBoolean($key, $default = false)
     {
         $value = self::getValue($key, $default);
+
         return filter_var($value, FILTER_VALIDATE_BOOLEAN);
     }
 
@@ -83,13 +86,14 @@ class SiteSetting extends Model
     public static function getJson($key, $default = [])
     {
         $value = self::getValue($key);
-        
+
         if (empty($value)) {
             return $default;
         }
-        
+
         try {
             $decoded = json_decode($value, true);
+
             return is_array($decoded) ? $decoded : $default;
         } catch (\Exception $e) {
             return $default;
@@ -102,27 +106,28 @@ class SiteSetting extends Model
     public static function getImages($key)
     {
         $value = self::getValue($key, '[]');
-        
+
         try {
             $images = json_decode($value, true);
-            
+
             if (is_array($images)) {
                 // Process each image to ensure proper URLs
                 return array_map(function ($image) {
                     if (is_string($image)) {
                         // If it's just a string path
                         return [
-                            'path' => asset('storage/' . $image),
-                            'filename' => basename($image)
+                            'path' => asset('storage/'.$image),
+                            'filename' => basename($image),
                         ];
                     } elseif (is_array($image) && isset($image['path'])) {
                         // If it's already an array with path
                         return [
                             'path' => $image['path'],
                             'filename' => $image['filename'] ?? basename($image['path']),
-                            'uploaded_at' => $image['uploaded_at'] ?? null
+                            'uploaded_at' => $image['uploaded_at'] ?? null,
                         ];
                     }
+
                     return $image;
                 }, $images);
             }
@@ -130,7 +135,7 @@ class SiteSetting extends Model
             // Log error if needed
             // \Log::error("Error decoding images for setting {$key}: " . $e->getMessage());
         }
-        
+
         return [];
     }
 
@@ -140,10 +145,10 @@ class SiteSetting extends Model
     public static function clearCache()
     {
         Cache::forget('all_settings');
-        
+
         // Clear individual setting caches
         self::all()->each(function ($setting) {
-            Cache::forget('setting_' . $setting->key);
+            Cache::forget('setting_'.$setting->key);
         });
     }
 
@@ -170,15 +175,16 @@ class SiteSetting extends Model
         if ($this->type === 'multiple_images') {
             try {
                 $decoded = json_decode($this->value, true);
+
                 return is_array($decoded) ? $decoded : [];
             } catch (\Exception $e) {
                 return [];
             }
         }
-        
+
         return [];
     }
-    
+
     /**
      * Accessor for boolean value
      */
@@ -187,22 +193,22 @@ class SiteSetting extends Model
         if ($this->type === 'boolean') {
             return $this->value === '1' || $this->value === 1 || $this->value === true;
         }
-        
+
         return null;
     }
-    
+
     /**
      * Accessor for image URL
      */
     public function getImageUrlAttribute()
     {
         if ($this->type === 'image' && $this->value) {
-            return asset('storage/' . $this->value);
+            return asset('storage/'.$this->value);
         }
-        
+
         return null;
     }
-    
+
     /**
      * Accessor for multiple image URLs
      */
@@ -211,7 +217,7 @@ class SiteSetting extends Model
         if ($this->type === 'multiple_images') {
             $urls = [];
             $images = $this->decoded_images;
-            
+
             foreach ($images as $image) {
                 if (is_string($image)) {
                     $urls[] = Storage::disk('public')->url($image);
@@ -219,11 +225,23 @@ class SiteSetting extends Model
                     $urls[] = $image['path'];
                 }
             }
-            
+
             return $urls;
         }
-        
+
         return [];
+    }
+
+    /**
+     * Accessor for file URL
+     */
+    public function getFileUrlAttribute()
+    {
+        if ($this->type === 'file' && $this->value) {
+            return Storage::disk('public')->url($this->value);
+        }
+
+        return null;
     }
 
     /**
@@ -240,11 +258,47 @@ class SiteSetting extends Model
     public static function getWithFallback($key, $configKey = null, $default = null)
     {
         $value = self::getValue($key);
-        
+
         if ($value === null && $configKey !== null) {
             $value = config($configKey, $default);
         }
-        
+
         return $value ?? $default;
+    }
+
+    /**
+     * Get file information
+     */
+    public static function getFileInfo($key)
+    {
+        $value = self::getValue($key);
+
+        if (empty($value)) {
+            return null;
+        }
+
+        return [
+            'path' => $value,
+            'url' => Storage::disk('public')->url($value),
+            'filename' => basename($value),
+            'extension' => pathinfo($value, PATHINFO_EXTENSION),
+            'size' => Storage::disk('public')->exists($value)
+                ? Storage::disk('public')->size($value)
+                : null,
+        ];
+    }
+
+    /**
+     * Check if setting is a file and get its URL
+     */
+    public static function getFileUrl($key)
+    {
+        $setting = self::where('key', $key)->first();
+
+        if ($setting && $setting->type === 'file' && $setting->value) {
+            return Storage::disk('public')->url($setting->value);
+        }
+
+        return null;
     }
 }
