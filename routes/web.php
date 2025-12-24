@@ -160,3 +160,24 @@ Route::get('robots.txt', function () {
 
     return response($robots, 200)->header('Content-Type', 'text/plain');
 });
+
+// Test routes for error pages
+Route::get('/test/403', function () {
+    abort(403, 'Test Forbidden Page');
+});
+
+Route::get('/test/404', function () {
+    abort(404, 'Test Not Found Page');
+});
+
+Route::get('/test/405', function () {
+    abort(405, 'Test Method Not Allowed');
+});
+
+Route::get('/test/419', function () {
+    abort(419, 'Test Page Expired');
+});
+
+Route::get('/test/500', function () {
+    abort(500, 'Test Server Error');
+});

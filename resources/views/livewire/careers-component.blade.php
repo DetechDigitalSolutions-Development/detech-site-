@@ -3,8 +3,8 @@
         <!-- Search Widget -->
         <div class="field" data-aos="fade-up">
             <form wire:submit.prevent class="form-blog-search">
-                <input type="text" id="blog-search-input" name="blog-search" placeholder="Search here" 
-                    class="text-18" wire:model.live.debounce.500ms="search" wire:keydown.enter.prevent>
+                <input type="text" id="blog-search-input" name="blog-search" placeholder="Search here" class="text-18"
+                    wire:model.live.debounce.500ms="search" wire:keydown.enter.prevent>
 
                 <!-- Job Type Dropdown -->
                 <div class="custom-select field text-18" role="combobox">
@@ -45,7 +45,8 @@
                             All Categories
                         </div>
                         @foreach ($categories as $category => $count)
-                            <div class="custom-select__option flex" wire:click="$set('selectedCategory', '{{ $category }}')">
+                            <div class="custom-select__option flex"
+                                wire:click="$set('selectedCategory', '{{ $category }}')">
                                 {{ $category }}
                             </div>
                         @endforeach
@@ -59,7 +60,7 @@
         </div>
 
         <!-- Removed the category buttons row -->
-        
+
         <div class="careers-list" data-aos="fade-up" data-aos-delay="200">
             @forelse($careers as $career)
                 <div class="career-item" @if (!$search && !$selectedType && !$selectedCategory) data-aos="fade-up" @endif
@@ -121,6 +122,20 @@
                             <div class="mt-20">
                                 <button class="button button--primary" wire:click="resetFilters">
                                     Clear Filters
+                                    <span class="svg-wrapper">
+                                        <svg class="icon-20" width="20" height="20" viewBox="0 0 20 20"
+                                            fill="none" xmlns="http://www.w3.org/2000/svg">
+                                            <path d="M3 6H17" stroke="currentColor" stroke-width="1.5"
+                                                stroke-linecap="round" stroke-linejoin="round" />
+                                            <path d="M5 10H15" stroke="currentColor" stroke-width="1.5"
+                                                stroke-linecap="round" stroke-linejoin="round" />
+                                            <path d="M7 14H13" stroke="currentColor" stroke-width="1.5"
+                                                stroke-linecap="round" stroke-linejoin="round" />
+                                            <circle cx="5" cy="6" r="2" fill="currentColor" />
+                                            <circle cx="10" cy="10" r="2" fill="currentColor" />
+                                            <circle cx="15" cy="14" r="2" fill="currentColor" />
+                                        </svg>
+                                    </span>
                                 </button>
                             </div>
                         @else

@@ -906,7 +906,7 @@
 
 .career-item {
     --color-background: rgba(242, 242, 242, 1);
-    --color-foreground: rgba(32, 40, 45, 1);
+    --color-foreground: rgba(2,19,53,1);
     --color-foreground-heading: rgba(28, 37, 57, 1);
     background-color: var(--color-background);
     border-radius: 12px;
@@ -921,7 +921,7 @@
       --color-foreground: rgba(255, 255, 255, 1);
       --color-foreground-heading: rgba(255, 255, 255, 1);
       transform: translateY(-2px); */
-    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.568);
+    box-shadow: 0 8px 24px rgba(28, 37, 57, 0.568);
 }
 
 .hover:hover {
@@ -1017,16 +1017,16 @@
 
 .career-item .button--primary {
     --color-primary-button-text: rgba(255, 255, 255, 1);
-    --color-primary-button-background: rgba(32, 40, 45, 1);
-    --color-primary-button-hover-text: rgba(32, 40, 45, 1);
+    --color-primary-button-background: rgba(2,19,53,1);
+    --color-primary-button-hover-text: rgba(2,19,53,1);
     --color-primary-button-hover-background: rgba(255, 255, 255, 1);
 }
 
 .career-item:hover .button--primary {
-    --color-primary-button-text: rgba(32, 40, 45, 1);
+    --color-primary-button-text: rgba(2,19,53,1);
     --color-primary-button-background: rgba(255, 255, 255, 1);
     --color-primary-button-hover-text: rgba(255, 255, 255, 1);
-    --color-primary-button-hover-background: rgba(32, 40, 45, 1);
+    --color-primary-button-hover-background: rgba(2,19,53,1);
 }
 
 .button--reset {
