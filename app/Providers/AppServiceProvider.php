@@ -32,11 +32,11 @@ class AppServiceProvider extends ServiceProvider
      * Bootstrap any application services.
      */
     public function boot(): void
-    {
+    {   
+        ProductSite::observe(ProductSiteObserver::class);
         SiteSetting::observe(SiteSettingObserver::class);
         Blog::observe(BlogObserver::class);
         Product::observe(ProductObserver::class);
-        ProductSite::observe(ProductSiteObserver::class);
         Project::observe(ProjectObserver::class);
         Team::observe(TeamObserver::class);
         Testimonial::observe(TestimonialObserver::class);
