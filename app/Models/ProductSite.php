@@ -6,20 +6,22 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Storage;
+use RalphJSmit\Laravel\SEO\Support\HasSEO;
 use ZipArchive;
 
 class ProductSite extends Model
 {
     use HasFactory;
+    use HasSEO;
 
     protected $fillable = [
         'product_title',
-        'featured_img',
-        'short_description',
+        'featured_img', // Add this
+        'short_description', // Add this
         'site_slug',
         'site_location',
         'site_file',
-        'product_link', // Added new field
+        'product_link',
         'extracted_path',
         'is_active',
     ];
@@ -27,6 +29,11 @@ class ProductSite extends Model
     protected $casts = [
         'is_active' => 'boolean',
     ];
+
+    public function getSitemapUrl(): string
+    {
+        return url($this->site_slug);
+    }
 
     /**
      * The "booted" method of the model.
@@ -36,11 +43,6 @@ class ProductSite extends Model
         static::creating(function ($productSite) {
             // Ensure slug is unique
             $productSite->site_slug = self::makeUniqueSlug($productSite->site_slug);
-
-            // Auto-generate product link if not provided
-            if (empty($productSite->product_link)) {
-                $productSite->product_link = $productSite->generateProductLink();
-            }
         });
 
         static::updating(function ($productSite) {
@@ -48,36 +50,6 @@ class ProductSite extends Model
             if ($productSite->isDirty('site_slug')) {
                 $productSite->site_slug = self::makeUniqueSlug($productSite->site_slug, $productSite->id);
             }
-
-            // Update product link if slug changes
-            if ($productSite->isDirty('site_slug') && empty($productSite->product_link)) {
-                $productSite->product_link = $productSite->generateProductLink();
-            }
-        });
-
-        static::saving(function ($productSite) {
-            // Ensure either product_link or site_file is provided, but not both
-            if (empty($productSite->product_link) && empty($productSite->site_file)) {
-                throw new \Exception('Either Product Link or Site File must be provided');
-            }
-
-            // If editing, allow keeping existing file if link is empty
-            if ($productSite->exists && empty($productSite->product_link)) {
-                if (empty($productSite->site_file) && empty($productSite->getOriginal('site_file'))) {
-                    throw new \Exception('Either Product Link or Site File must be provided');
-                }
-            }
-
-            // Auto-generate product link if not provided and using external link
-            if (! empty($productSite->product_link) && empty($productSite->site_file)) {
-                // Ensure it's a valid URL
-                if (! filter_var($productSite->product_link, FILTER_VALIDATE_URL)) {
-                    throw new \Exception('Please enter a valid URL for the product link');
-                }
-            }
-
-            // Ensure slug is unique
-            $productSite->site_slug = self::makeUniqueSlug($productSite->site_slug, $productSite->id);
         });
 
         // Delete files when model is deleted
@@ -105,15 +77,6 @@ class ProductSite extends Model
         }
 
         return $slug;
-    }
-
-    /**
-     * Generate product link
-     */
-    public function generateProductLink()
-    {
-        // Generate a demo/product link
-        return route('product.site', $this->site_slug);
     }
 
     /**
@@ -152,26 +115,9 @@ class ProductSite extends Model
     /**
      * Get site URL
      */
-    // public function getSiteUrlAttribute()
-    // {
-    //     return url($this->site_slug);
-    // }
-
-    /**
-     * Get product link with fallback
-     */
-    public function getProductLinkAttribute($value)
+    public function getSiteUrlAttribute()
     {
-        // Return stored product link or generate one
-        return $value ?? $this->generateProductLink();
-    }
-
-    /**
-     * Get demo link (alias for product_link)
-     */
-    public function getDemoLinkAttribute()
-    {
-        return $this->product_link;
+        return url($this->site_slug);
     }
 
     /**
@@ -198,94 +144,58 @@ class ProductSite extends Model
         return storage_path('app/public/'.$this->extracted_path);
     }
 
-    // In your ProductSite model, add these methods
-
     /**
-     * Determine if site uses external link
-     */
-    public function usesExternalLink()
-    {
-        return ! empty($this->product_link) && empty($this->site_file);
-    }
-
-    /**
-     * Determine if site uses uploaded zip
-     */
-    public function usesZipFile()
-    {
-        return ! empty($this->site_file);
-    }
-
-    /**
-     * Get site URL based on configuration
-     */
-    public function getSiteUrlAttribute()
-    {
-        if ($this->usesExternalLink()) {
-            return $this->product_link;
-        }
-
-        if ($this->extracted_path) {
-            // This would need to be handled by a route that serves extracted files
-            return url('/product-sites/'.$this->site_slug);
-        }
-
-        return null;
-    }
-
-    /**
-     * Override the cleanupFiles method to handle both cases
+     * Clean up files and folders - FIXED VERSION
      */
     public function cleanupFiles()
     {
         Log::info("=== STARTING CLEANUP FOR ProductSite ID: {$this->id} ===");
         Log::info("Site Slug: {$this->site_slug}");
-        Log::info('Uses External Link: '.($this->usesExternalLink() ? 'Yes' : 'No'));
-        Log::info('Uses Zip File: '.($this->usesZipFile() ? 'Yes' : 'No'));
+        Log::info("Site File Path: {$this->site_file}");
+        Log::info("Extracted Path: {$this->extracted_path}");
 
         try {
-            // Only clean up files if using zip upload
-            if ($this->usesZipFile()) {
-                // 1. Delete extracted directory
-                if ($this->extracted_path) {
-                    $extractedPath = 'public/'.trim($this->extracted_path, '/');
-                    Log::info("Attempting to delete extracted path: {$extractedPath}");
+            // 1. Delete extracted directory
+            if ($this->extracted_path) {
+                $extractedPath = 'public/'.trim($this->extracted_path, '/');
+                Log::info("Attempting to delete extracted path: {$extractedPath}");
 
-                    if (Storage::exists($extractedPath)) {
-                        Storage::deleteDirectory($extractedPath);
-                        Log::info("✅ Successfully deleted extracted directory: {$extractedPath}");
-                    } else {
-                        Log::warning("⚠️ Extracted path does not exist: {$extractedPath}");
+                if (Storage::exists($extractedPath)) {
+                    Storage::deleteDirectory($extractedPath);
+                    Log::info("✅ Successfully deleted extracted directory: {$extractedPath}");
+                } else {
+                    Log::warning("⚠️ Extracted path does not exist: {$extractedPath}");
 
-                        $altPath = trim($this->extracted_path, '/');
-                        if (Storage::exists($altPath)) {
-                            Storage::deleteDirectory($altPath);
-                            Log::info("✅ Deleted using alternative path: {$altPath}");
-                        }
+                    // Try alternative path format
+                    $altPath = trim($this->extracted_path, '/');
+                    if (Storage::exists($altPath)) {
+                        Storage::deleteDirectory($altPath);
+                        Log::info("✅ Deleted using alternative path: {$altPath}");
+                    }
+                }
+            }
+
+            // 2. Delete zip file
+            if ($this->site_file) {
+                $zipPath = 'public/'.trim($this->site_file, '/');
+                Log::info("Attempting to delete zip file: {$zipPath}");
+
+                if (Storage::exists($zipPath)) {
+                    Storage::delete($zipPath);
+                    Log::info("✅ Successfully deleted zip file: {$zipPath}");
+                } else {
+                    Log::warning("⚠️ Zip file does not exist: {$zipPath}");
+
+                    // Try alternative path format
+                    $altZipPath = trim($this->site_file, '/');
+                    if (Storage::exists($altZipPath)) {
+                        Storage::delete($altZipPath);
+                        Log::info("✅ Deleted zip using alternative path: {$altZipPath}");
                     }
                 }
 
-                // 2. Delete zip file
-                if ($this->site_file) {
-                    $zipPath = 'public/'.trim($this->site_file, '/');
-                    Log::info("Attempting to delete zip file: {$zipPath}");
-
-                    if (Storage::exists($zipPath)) {
-                        Storage::delete($zipPath);
-                        Log::info("✅ Successfully deleted zip file: {$zipPath}");
-                    } else {
-                        Log::warning("⚠️ Zip file does not exist: {$zipPath}");
-
-                        $altZipPath = trim($this->site_file, '/');
-                        if (Storage::exists($altZipPath)) {
-                            Storage::delete($altZipPath);
-                            Log::info("✅ Deleted zip using alternative path: {$altZipPath}");
-                        }
-                    }
-
-                    // 3. Clean up empty parent directories
-                    $this->cleanupEmptyDirectories();
-                }
+                // 3. Clean up empty parent directories
+                $this->cleanupEmptyDirectories();
             }
 
             Log::info("=== CLEANUP COMPLETED FOR ProductSite ID: {$this->id} ===");
@@ -365,36 +275,5 @@ class ProductSite extends Model
         }
 
         return null;
-    }
-
-    /**
-     * Scope for active products
-     */
-    public function scopeActive($query)
-    {
-        return $query->where('is_active', true);
-    }
-
-    /**
-     * Scope for featured products (if you add featured field later)
-     */
-    public function scopeFeatured($query)
-    {
-        return $query->where('is_active', true)
-            ->whereNotNull('featured_img')
-            ->orderBy('created_at', 'desc');
-    }
-
-    /**
-     * Validate product link
-     */
-    public function validateProductLink()
-    {
-        if (empty($this->product_link)) {
-            return false;
-        }
-
-        // Check if it's a valid URL
-        return filter_var($this->product_link, FILTER_VALIDATE_URL) !== false;
     }
 }

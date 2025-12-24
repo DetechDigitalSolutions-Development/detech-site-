@@ -150,3 +150,13 @@ Route::get('/test-email', function () {
         return 'Error: ' . $e->getMessage();
     }
 });
+
+use Illuminate\Support\Facades\App;
+
+Route::get('robots.txt', function () {
+    $robots = App::isProduction() 
+        ? "User-agent: *\nDisallow: /admin\nDisallow: /login\nSitemap: " . url('sitemap.xml')
+        : "User-agent: *\nDisallow: /"; // Block EVERYTHING on non-production
+
+    return response($robots, 200)->header('Content-Type', 'text/plain');
+});

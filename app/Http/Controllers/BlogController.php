@@ -19,7 +19,8 @@ class BlogController extends Controller
         // The framework automatically fetches the blog post based on the route wildcard.
         // It returns a 404 if not found.
         // Fetch the last 4 latest blogs
-        $latestBlogs = Blog::get();
+        $latestBlogs = Blog::latest()->take(4)->get();
+        // $latestBlogs = Blog::get();
         $comments = $blog->comments()->get();
 
         

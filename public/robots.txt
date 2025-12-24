@@ -1,2 +1,8 @@
 User-agent: *
-Disallow:
+Disallow: /dt_admin
+Disallow: /nova
+Disallow: /horizon
+Disallow: /login
+Disallow: /register
+
+Sitemap: https://detech.live/sitemap.xml

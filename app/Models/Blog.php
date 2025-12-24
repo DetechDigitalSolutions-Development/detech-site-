@@ -5,11 +5,12 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Str;
-use App\Models\Comment;
+use RalphJSmit\Laravel\SEO\Support\HasSEO;
 
 class Blog extends Model
 {
     use HasFactory;
+    use HasSEO;
 
     /**
      * The attributes that are mass assignable.
@@ -39,6 +40,11 @@ class Blog extends Model
         'tags' => 'array',
     ];
 
+    public function getSitemapUrl(): string
+    {
+        return route('blogs.show', $this->slug);
+    }
+
     public function comments()
     {
         return $this->hasMany(Comment::class);
@@ -55,7 +61,7 @@ class Blog extends Model
 
         // Check if slug already exists
         while (static::where('slug', $slug)->where('id', '!=', $this->id)->exists()) {
-            $slug = $originalSlug . '-' . $count++;
+            $slug = $originalSlug.'-'.$count++;
         }
 
         return $slug;

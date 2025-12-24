@@ -5,17 +5,22 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Str;
+use RalphJSmit\Laravel\SEO\Support\HasSEO;
 
 class Project extends Model
 {
     use HasFactory;
+    use HasSEO;
 
     /**
      * Project types
      */
     public const TYPE_WEBSITE = 'website';
+
     public const TYPE_WEB_SYSTEM = 'web_system';
+
     public const TYPE_MOBILE_APP = 'mobile_app';
+
     public const TYPE_DESKTOP_APP = 'desktop_app';
 
     /**
@@ -50,10 +55,13 @@ class Project extends Model
         'categories' => 'array',
     ];
 
+    public function getSitemapUrl(): string
+    {
+        return route('projects.show', $this->slug);
+    }
+
     /**
      * Get the project type options.
-     *
-     * @return array
      */
     public static function getTypeOptions(): array
     {
@@ -67,8 +75,6 @@ class Project extends Model
 
     /**
      * Get formatted type name.
-     *
-     * @return string
      */
     public function getFormattedTypeAttribute(): string
     {
@@ -77,12 +83,10 @@ class Project extends Model
 
     /**
      * Get project duration in formatted string.
-     *
-     * @return string|null
      */
     public function getFormattedDurationAttribute(): ?string
     {
-        if (!$this->project_duration) {
+        if (! $this->project_duration) {
             return null;
         }
 
@@ -90,17 +94,17 @@ class Project extends Model
         if (preg_match('/(\d+)\s*(month|year|week|day)s?/i', $this->project_duration, $matches)) {
             $number = $matches[1];
             $unit = strtolower($matches[2]);
-            
+
             $units = [
                 'day' => 'Day',
                 'week' => 'Week',
                 'month' => 'Month',
                 'year' => 'Year',
             ];
-            
+
             $unitFormatted = $units[$unit] ?? ucfirst($unit);
             $plural = $number > 1 ? 's' : '';
-            
+
             return "{$number} {$unitFormatted}{$plural}";
         }
 
@@ -141,11 +145,11 @@ class Project extends Model
         static::creating(function ($project) {
             if (empty($project->slug)) {
                 $project->slug = Str::slug($project->title);
-                
+
                 // Check for duplicate slugs
                 $count = static::where('slug', $project->slug)->count();
                 if ($count > 0) {
-                    $project->slug = $project->slug . '-' . ($count + 1);
+                    $project->slug = $project->slug.'-'.($count + 1);
                 }
             }
         });
@@ -153,14 +157,14 @@ class Project extends Model
         static::updating(function ($project) {
             if ($project->isDirty('title') && empty($project->slug)) {
                 $project->slug = Str::slug($project->title);
-                
+
                 // Check for duplicate slugs
                 $count = static::where('slug', $project->slug)
                     ->where('id', '!=', $project->id)
                     ->count();
-                    
+
                 if ($count > 0) {
-                    $project->slug = $project->slug . '-' . time();
+                    $project->slug = $project->slug.'-'.time();
                 }
             }
         });
@@ -168,8 +172,6 @@ class Project extends Model
 
     /**
      * Get the route key for the model.
-     *
-     * @return string
      */
     public function getRouteKeyName(): string
     {
@@ -178,8 +180,6 @@ class Project extends Model
 
     /**
      * Get project images as array with full URLs
-     *
-     * @return array
      */
     public function getProjectImagesAttribute(): array
     {
@@ -188,14 +188,12 @@ class Project extends Model
         }
 
         return array_map(function ($image) {
-            return asset('storage/' . $image);
+            return asset('storage/'.$image);
         }, $this->project_imgs);
     }
 
     /**
      * Get featured image URL
-     *
-     * @return string|null
      */
     public function getFeaturedImageUrlAttribute(): ?string
     {
@@ -203,23 +201,19 @@ class Project extends Model
             return null;
         }
 
-        return asset('storage/' . $this->featured_img);
+        return asset('storage/'.$this->featured_img);
     }
 
     /**
      * Check if project has multiple images
-     *
-     * @return bool
      */
     public function getHasMultipleImagesAttribute(): bool
     {
-        return !empty($this->project_imgs) && count($this->project_imgs) > 1;
+        return ! empty($this->project_imgs) && count($this->project_imgs) > 1;
     }
 
     /**
      * Get project categories as array
-     *
-     * @return array
      */
     public function getCategoriesListAttribute(): array
     {
@@ -232,15 +226,13 @@ class Project extends Model
 
     /**
      * Get project metadata for SEO
-     *
-     * @return array
      */
     public function getMetaDataAttribute(): array
     {
         return [
-            'title' => $this->title . ' - Project Case Study',
-            'description' => $this->short_description ?: 
-                'Explore this ' . $this->formatted_type . ' project by ' . ($this->client_name ?: 'our team'),
+            'title' => $this->title.' - Project Case Study',
+            'description' => $this->short_description ?:
+                'Explore this '.$this->formatted_type.' project by '.($this->client_name ?: 'our team'),
             'keywords' => implode(', ', array_merge(
                 [$this->type, $this->industry, $this->region],
                 $this->categories_list
